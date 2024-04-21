@@ -4,7 +4,9 @@ mod systems {
 
 mod models {
     mod moves;
-    mod position;
+    mod pokemon;
+    mod player;
+    mod game;
 }
 
 mod tests {
