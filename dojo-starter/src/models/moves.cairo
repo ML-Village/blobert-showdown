@@ -1,32 +1,54 @@
 use starknet::ContractAddress;
 
 #[derive(Model, Copy, Drop, Serde)]
-#[dojo::event] // A model with `dojo::event` is able to be emitted with the `emit!` macro.
-struct Moves {
+struct MoveBook {
     #[key]
-    player: ContractAddress,
-    remaining: u8,
-    last_direction: Direction
+    move_id: u16,
+    accuracy: u8,
+    basepower: u16,
+    category: MoveCategory,
+    name: felt252,
+    pp: u16,
+    priority: u8,
+    secondary: u16,
+    target: MoveTarget,
+    moveSystemCallBack: u16,
+    flags: u16,
 }
 
-#[derive(Serde, Copy, Drop, Introspect)]
-enum Direction {
-    None,
-    Left,
-    Right,
-    Up,
-    Down,
+#[derive(Copy, Drop, Serde, PartialEq, Introspect)]
+enum MoveCategory {
+    Physical,
+    Special,
+    Status
 }
 
-impl DirectionIntoFelt252 of Into<Direction, felt252> {
-    fn into(self: Direction) -> felt252 {
-        match self {
-            Direction::None => 0,
-            Direction::Left => 1,
-            Direction::Right => 2,
-            Direction::Up => 3,
-            Direction::Down => 4,
-        }
-    }
+#[derive(Copy, Drop, Serde, PartialEq, Introspect)]
+enum MoveTarget {
+    Any,
+    Self,
+    Normal,
+    AllAdjacent,
+    AllyTeam
 }
 
+#[derive(Copy, Drop, Serde, PartialEq, Introspect)]
+enum SideEffect {
+    Burn,
+    Paralyzed,
+    Frozen,
+    Sleep,
+    Poison,
+    Confusion,
+    Flinch
+}
+
+#[derive(Model, Copy, Drop, Serde)]
+struct Gen1RandomMoveSet {
+    #[key]
+    poke_id: u32,
+    move_1: u16,
+    move_2: u16,
+    move_3: u16,
+    move_4: u16
+}
