@@ -4,7 +4,7 @@ use dojo_starter::models::pokemon::Pokedex;
 trait IRegistry {
 
     fn create_pokemon(
-        pokemon_id: u128,
+        pokemon_id: u32,
         name: felt252,
         randomlvl: u8,
         hp: u16,

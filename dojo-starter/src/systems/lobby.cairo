@@ -48,8 +48,8 @@ mod lobby {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
-            let (mut player) = get!(world, caller, (Player));
-            let (mut lineup) = get!(world, (caller,0), (Lineup));
+            let mut player = get!(world, caller, (Player));
+            let mut lineup = get!(world, (caller,0), (Lineup));
 
             //player.player_id = caller;
             player.name = name;
@@ -81,7 +81,7 @@ mod lobby {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
-            let (mut player) = get!(world, caller, (Player));
+            let mut player = get!(world, caller, (Player));
             player.profile_pic = profile_pic;
 
             set!(world, (player));
@@ -160,10 +160,11 @@ mod lobby {
                 turn: 0,
                 game_status: GameStatus::Awaiting,
                 winner: utils::zero_address(),
+                winner_slot: 0,
                 turn_expiry: turn_expiry,
                 challenge_expiry: 0,
                 total_turn_time: total_turn_time,
-                timestamp: get_block_timestamp(),
+                timestamp_start: get_block_timestamp(),
                 timestamp_end: 0,
             };
 
@@ -216,10 +217,11 @@ mod lobby {
                     turn: 0,
                     game_status: GameStatus::Awaiting,
                     winner: utils::zero_address(),
+                    winner_slot: 0,
                     turn_expiry: turn_expiry,
                     challenge_expiry: 0,
                     total_turn_time: total_turn_time,
-                    timestamp: get_block_timestamp(),
+                    timestamp_start: get_block_timestamp(),
                     timestamp_end: 0,
                 };
 
@@ -246,10 +248,10 @@ mod lobby {
             let caller = get_caller_address();
 
             //Get the game
-            let (mut game) = get!(world, game_id, (Game));
+            let mut game = get!(world, game_id, (Game));
 
             // Check if target player is the caller
-            assert(game.player_b == caller, 'You are not the challenged player');
+            assert(game.player_b == caller, 'Caller not Callenged Player');
 
             //Check if the challenged lineup is filled , if not revert
             let callerlineup: Lineup = get!(world, (caller,0), (Lineup));

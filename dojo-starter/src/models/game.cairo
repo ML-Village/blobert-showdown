@@ -15,7 +15,7 @@ struct Game {
     turn: u16, // turn number
     game_status: GameStatus,
     winner: ContractAddress,
-    winner_slot: u8, // 0: technical expired, 1: player a, 2: player b
+    winner_slot: u8, // 0: unknown, 1: player a, 2: player b, 3: technical error
 
     // timestamps in unix epoch
     turn_expiry: u64,           // Unix time, time for each turn to expire (0 for unlimited)
