@@ -1,0 +1,125 @@
+kind = "DojoModel"
+class_hash = "0x4ec1f85ba8ab622ef4d0845a60c45809ba06862b4fd8a8076b1c85475419dab"
+original_class_hash = "0x4ec1f85ba8ab622ef4d0845a60c45809ba06862b4fd8a8076b1c85475419dab"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_game_poke_in_game.json"
+name = "dojo_starter::models::game::poke_in_game"
+
+[[members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "player_id"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "slot"
+type = "u8"
+key = true
+
+[[members]]
+name = "pokemon_id"
+type = "u32"
+key = false
+
+[[members]]
+name = "lvl"
+type = "u8"
+key = false
+
+[[members]]
+name = "hp"
+type = "u16"
+key = false
+
+[[members]]
+name = "atk"
+type = "u16"
+key = false
+
+[[members]]
+name = "def"
+type = "u16"
+key = false
+
+[[members]]
+name = "spa"
+type = "u16"
+key = false
+
+[[members]]
+name = "spd"
+type = "u16"
+key = false
+
+[[members]]
+name = "spe"
+type = "u16"
+key = false
+
+[[members]]
+name = "move1"
+type = "u16"
+key = false
+
+[[members]]
+name = "move1_limit"
+type = "u8"
+key = false
+
+[[members]]
+name = "move2"
+type = "u16"
+key = false
+
+[[members]]
+name = "move2_limit"
+type = "u8"
+key = false
+
+[[members]]
+name = "move3"
+type = "u16"
+key = false
+
+[[members]]
+name = "move3_limit"
+type = "u8"
+key = false
+
+[[members]]
+name = "move4"
+type = "u16"
+key = false
+
+[[members]]
+name = "move4_limit"
+type = "u8"
+key = false
+
+[[members]]
+name = "side_effect1"
+type = "SideEffect"
+key = false
+
+[[members]]
+name = "side_effect2"
+type = "SideEffect"
+key = false
+
+[[members]]
+name = "side_effect3"
+type = "SideEffect"
+key = false
+
+[[members]]
+name = "side_effect4"
+type = "SideEffect"
+key = false
+
+[[members]]
+name = "status"
+type = "PokeGameStatus"
+key = false

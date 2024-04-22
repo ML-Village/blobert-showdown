@@ -1,0 +1,75 @@
+kind = "DojoModel"
+class_hash = "0x641d7d3c7220db7fff926fc107cf6cbae2f10b8c4b15782909fcc6d9220607f"
+original_class_hash = "0x641d7d3c7220db7fff926fc107cf6cbae2f10b8c4b15782909fcc6d9220607f"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_game_game.json"
+name = "dojo_starter::models::game::game"
+
+[[members]]
+name = "game_id"
+type = "u128"
+key = true
+
+[[members]]
+name = "player_a"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "player_b"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "player_a_active_slot"
+type = "u8"
+key = false
+
+[[members]]
+name = "player_b_active_slot"
+type = "u8"
+key = false
+
+[[members]]
+name = "turn"
+type = "u16"
+key = false
+
+[[members]]
+name = "game_status"
+type = "GameStatus"
+key = false
+
+[[members]]
+name = "winner"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "winner_slot"
+type = "u8"
+key = false
+
+[[members]]
+name = "turn_expiry"
+type = "u64"
+key = false
+
+[[members]]
+name = "challenge_expiry"
+type = "u64"
+key = false
+
+[[members]]
+name = "total_turn_time"
+type = "u64"
+key = false
+
+[[members]]
+name = "timestamp_start"
+type = "u64"
+key = false
+
+[[members]]
+name = "timestamp_end"
+type = "u64"
+key = false

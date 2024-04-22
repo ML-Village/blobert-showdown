@@ -1,0 +1,50 @@
+kind = "DojoModel"
+class_hash = "0x7bc439b8efd06c767e031031919e48eb00eaded23ce0198e4262dd0e6800fa2"
+original_class_hash = "0x7bc439b8efd06c767e031031919e48eb00eaded23ce0198e4262dd0e6800fa2"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_pokemon_pokedex.json"
+name = "dojo_starter::models::pokemon::pokedex"
+
+[[members]]
+name = "pokemon_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "name"
+type = "felt252"
+key = false
+
+[[members]]
+name = "randomlvl"
+type = "u8"
+key = false
+
+[[members]]
+name = "hp"
+type = "u16"
+key = false
+
+[[members]]
+name = "atk"
+type = "u16"
+key = false
+
+[[members]]
+name = "def"
+type = "u16"
+key = false
+
+[[members]]
+name = "spa"
+type = "u16"
+key = false
+
+[[members]]
+name = "spd"
+type = "u16"
+key = false
+
+[[members]]
+name = "spe"
+type = "u16"
+key = false

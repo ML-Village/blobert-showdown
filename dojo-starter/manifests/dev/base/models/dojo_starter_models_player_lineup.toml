@@ -1,0 +1,45 @@
+kind = "DojoModel"
+class_hash = "0x13d706616881cba9e93681e11e2f2beb6dd4f7709f4b1cda0c324b0dec8cf57"
+original_class_hash = "0x13d706616881cba9e93681e11e2f2beb6dd4f7709f4b1cda0c324b0dec8cf57"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_player_lineup.json"
+name = "dojo_starter::models::player::lineup"
+
+[[members]]
+name = "player_id"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "game_id"
+type = "u128"
+key = true
+
+[[members]]
+name = "slot1"
+type = "u32"
+key = false
+
+[[members]]
+name = "slot2"
+type = "u32"
+key = false
+
+[[members]]
+name = "slot3"
+type = "u32"
+key = false
+
+[[members]]
+name = "slot4"
+type = "u32"
+key = false
+
+[[members]]
+name = "slot5"
+type = "u32"
+key = false
+
+[[members]]
+name = "slot6"
+type = "u32"
+key = false

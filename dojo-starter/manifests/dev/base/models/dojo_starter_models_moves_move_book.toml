@@ -1,0 +1,60 @@
+kind = "DojoModel"
+class_hash = "0x3afdcf3ad31b70748e851bda321187c8a66b5703d115519bf20561af7db89ae"
+original_class_hash = "0x3afdcf3ad31b70748e851bda321187c8a66b5703d115519bf20561af7db89ae"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_moves_move_book.json"
+name = "dojo_starter::models::moves::move_book"
+
+[[members]]
+name = "move_id"
+type = "u16"
+key = true
+
+[[members]]
+name = "accuracy"
+type = "u8"
+key = false
+
+[[members]]
+name = "basepower"
+type = "u16"
+key = false
+
+[[members]]
+name = "category"
+type = "MoveCategory"
+key = false
+
+[[members]]
+name = "name"
+type = "felt252"
+key = false
+
+[[members]]
+name = "pp"
+type = "u16"
+key = false
+
+[[members]]
+name = "priority"
+type = "u8"
+key = false
+
+[[members]]
+name = "secondary"
+type = "u16"
+key = false
+
+[[members]]
+name = "target"
+type = "MoveTarget"
+key = false
+
+[[members]]
+name = "moveSystemCallBack"
+type = "u16"
+key = false
+
+[[members]]
+name = "flags"
+type = "u16"
+key = false

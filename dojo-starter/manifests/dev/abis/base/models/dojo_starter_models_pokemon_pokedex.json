@@ -169,40 +169,54 @@
   },
   {
     "type": "impl",
-    "name": "positionImpl",
-    "interface_name": "dojo_starter::models::position::Iposition"
+    "name": "pokedexImpl",
+    "interface_name": "dojo_starter::models::pokemon::Ipokedex"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::position::Vec2",
+    "name": "dojo_starter::models::pokemon::Pokedex",
     "members": [
       {
-        "name": "x",
+        "name": "pokemon_id",
         "type": "core::integer::u32"
       },
       {
-        "name": "y",
-        "type": "core::integer::u32"
-      }
-    ]
-  },
-  {
-    "type": "struct",
-    "name": "dojo_starter::models::position::Position",
-    "members": [
-      {
-        "name": "player",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "name": "name",
+        "type": "core::felt252"
       },
       {
-        "name": "vec",
-        "type": "dojo_starter::models::position::Vec2"
+        "name": "randomlvl",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "hp",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "atk",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "def",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spa",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spd",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spe",
+        "type": "core::integer::u16"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::position::Iposition",
+    "name": "dojo_starter::models::pokemon::Ipokedex",
     "items": [
       {
         "type": "function",
@@ -210,7 +224,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::position::Position"
+            "type": "dojo_starter::models::pokemon::Pokedex"
           }
         ],
         "outputs": [],
@@ -220,7 +234,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::position::position::Event",
+    "name": "dojo_starter::models::pokemon::pokedex::Event",
     "kind": "enum",
     "variants": []
   }

@@ -1,0 +1,349 @@
+[
+  {
+    "type": "impl",
+    "name": "DojoModelImpl",
+    "interface_name": "dojo::model::IDojoModel"
+  },
+  {
+    "type": "struct",
+    "name": "core::array::Span::<core::integer::u8>",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<core::integer::u8>"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "core::array::Span::<core::felt252>",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "core::array::Span::<core::array::Span::<core::felt252>>",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<core::array::Span::<core::felt252>>"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "dojo::database::introspect::Struct",
+    "members": [
+      {
+        "name": "name",
+        "type": "core::felt252"
+      },
+      {
+        "name": "attrs",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "name": "children",
+        "type": "core::array::Span::<core::array::Span::<core::felt252>>"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "core::array::Span::<(core::felt252, core::array::Span::<core::felt252>)>",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<(core::felt252, core::array::Span::<core::felt252>)>"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "dojo::database::introspect::Enum",
+    "members": [
+      {
+        "name": "name",
+        "type": "core::felt252"
+      },
+      {
+        "name": "attrs",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "name": "children",
+        "type": "core::array::Span::<(core::felt252, core::array::Span::<core::felt252>)>"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "dojo::database::introspect::Ty",
+    "variants": [
+      {
+        "name": "Primitive",
+        "type": "core::felt252"
+      },
+      {
+        "name": "Struct",
+        "type": "dojo::database::introspect::Struct"
+      },
+      {
+        "name": "Enum",
+        "type": "dojo::database::introspect::Enum"
+      },
+      {
+        "name": "Tuple",
+        "type": "core::array::Span::<core::array::Span::<core::felt252>>"
+      },
+      {
+        "name": "Array",
+        "type": "core::integer::u32"
+      }
+    ]
+  },
+  {
+    "type": "interface",
+    "name": "dojo::model::IDojoModel",
+    "items": [
+      {
+        "type": "function",
+        "name": "name",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::felt252"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "unpacked_size",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::integer::u32"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "packed_size",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::integer::u32"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "layout",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::array::Span::<core::integer::u8>"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "schema",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "dojo::database::introspect::Ty"
+          }
+        ],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "poke_in_gameImpl",
+    "interface_name": "dojo_starter::models::game::Ipoke_in_game"
+  },
+  {
+    "type": "enum",
+    "name": "dojo_starter::models::moves::SideEffect",
+    "variants": [
+      {
+        "name": "Burn",
+        "type": "()"
+      },
+      {
+        "name": "Paralyzed",
+        "type": "()"
+      },
+      {
+        "name": "Frozen",
+        "type": "()"
+      },
+      {
+        "name": "Sleep",
+        "type": "()"
+      },
+      {
+        "name": "Poison",
+        "type": "()"
+      },
+      {
+        "name": "Confusion",
+        "type": "()"
+      },
+      {
+        "name": "Flinch",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "dojo_starter::models::game::PokeGameStatus",
+    "variants": [
+      {
+        "name": "Alive",
+        "type": "()"
+      },
+      {
+        "name": "Fainted",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "dojo_starter::models::game::PokeInGame",
+    "members": [
+      {
+        "name": "game_id",
+        "type": "core::integer::u32"
+      },
+      {
+        "name": "player_id",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "slot",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "pokemon_id",
+        "type": "core::integer::u32"
+      },
+      {
+        "name": "lvl",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "hp",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "atk",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "def",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spa",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spd",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spe",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move1",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move1_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move2",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move2_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move3",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move3_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move4",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move4_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "side_effect1",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "side_effect2",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "side_effect3",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "side_effect4",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "status",
+        "type": "dojo_starter::models::game::PokeGameStatus"
+      }
+    ]
+  },
+  {
+    "type": "interface",
+    "name": "dojo_starter::models::game::Ipoke_in_game",
+    "items": [
+      {
+        "type": "function",
+        "name": "ensure_abi",
+        "inputs": [
+          {
+            "name": "model",
+            "type": "dojo_starter::models::game::PokeInGame"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "dojo_starter::models::game::poke_in_game::Event",
+    "kind": "enum",
+    "variants": []
+  }
+]
