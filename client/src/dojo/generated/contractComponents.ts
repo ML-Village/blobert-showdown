@@ -2,44 +2,113 @@
 
 import { defineComponent, Type as RecsType, World } from "@dojoengine/recs";
 
-export type ContractComponents = Awaited<
-    ReturnType<typeof defineContractComponents>
->;
+export type ContractComponents = Awaited<ReturnType<typeof defineContractComponents>>;
 
 export function defineContractComponents(world: World) {
-    return {
-        Moves: (() => {
-            return defineComponent(
-                world,
-                {
-                    player: RecsType.BigInt,
-                    remaining: RecsType.Number,
-                    last_direction: RecsType.Number,
-                },
-                {
-                    metadata: {
-                        name: "Moves",
-                        types: ["contractaddress", "u8", "enum"],
-                        customTypes: ["Direction"],
-                    },
-                }
-            );
-        })(),
-        Position: (() => {
-            return defineComponent(
-                world,
-                {
-                    player: RecsType.BigInt,
-                    vec: { x: RecsType.Number, y: RecsType.Number },
-                },
-                {
-                    metadata: {
-                        name: "Position",
-                        types: ["contractaddress", "u32", "u32"],
-                        customTypes: ["Vec2"],
-                    },
-                }
-            );
-        })(),
-    };
+  return {
+    BlobertDex: (() => {
+      return defineComponent(
+        world,
+        { blob_id: RecsType.Number, name: RecsType.BigInt, randomlvl: RecsType.Number, hp: RecsType.Number, atk: RecsType.Number, def: RecsType.Number, spa: RecsType.Number, spd: RecsType.Number, spe: RecsType.Number },
+        {
+          metadata: {
+            name: "BlobertDex",
+            types: ["u32","felt252","u8","u16","u16","u16","u16","u16","u16"],
+            customTypes: [],
+          },
+        }
+      );
+    })(),
+    BlobertInGame: (() => {
+      return defineComponent(
+        world,
+        { game_id: RecsType.Number, player_id: RecsType.BigInt, slot: RecsType.Number, blob_id: RecsType.Number, lvl: RecsType.Number, hp: RecsType.Number, atk: RecsType.Number, def: RecsType.Number, spa: RecsType.Number, spd: RecsType.Number, spe: RecsType.Number, move1: RecsType.Number, move1_limit: RecsType.Number, move2: RecsType.Number, move2_limit: RecsType.Number, move3: RecsType.Number, move3_limit: RecsType.Number, move4: RecsType.Number, move4_limit: RecsType.Number, side_effect1: RecsType.Number, side_effect2: RecsType.Number, side_effect3: RecsType.Number, side_effect4: RecsType.Number, status: RecsType.Number },
+        {
+          metadata: {
+            name: "BlobertInGame",
+            types: ["u32","contractaddress","u8","u32","u8","u16","u16","u16","u16","u16","u16","u16","u8","u16","u8","u16","u8","u16","u8","enum","enum","enum","enum","enum"],
+            customTypes: ["SideEffect","SideEffect","SideEffect","SideEffect","BlobertGameStatus"],
+          },
+        }
+      );
+    })(),
+    Game: (() => {
+      return defineComponent(
+        world,
+        { game_id: RecsType.BigInt, player_a: RecsType.BigInt, player_b: RecsType.BigInt, player_a_active_slot: RecsType.Number, player_b_active_slot: RecsType.Number, turn: RecsType.Number, game_status: RecsType.Number, winner: RecsType.BigInt, winner_slot: RecsType.Number, turn_expiry: RecsType.BigInt, challenge_expiry: RecsType.BigInt, total_turn_time: RecsType.BigInt, timestamp_start: RecsType.BigInt, timestamp_end: RecsType.BigInt },
+        {
+          metadata: {
+            name: "Game",
+            types: ["u128","contractaddress","contractaddress","u8","u8","u16","enum","contractaddress","u8","u64","u64","u64","u64","u64"],
+            customTypes: ["GameStatus"],
+          },
+        }
+      );
+    })(),
+    Turn: (() => {
+      return defineComponent(
+        world,
+        { game_id: RecsType.BigInt, turn: RecsType.Number, turn_status: RecsType.Number, move_a: { hash: RecsType.BigInt, salt: RecsType.BigInt, move: RecsType.Number }, move_b: { hash: RecsType.BigInt, salt: RecsType.BigInt, move: RecsType.Number }, timestamp_start: RecsType.BigInt, timestamp_end: RecsType.BigInt },
+        {
+          metadata: {
+            name: "Turn",
+            types: ["u128","u8","enum","u64","u64","u16","u64","u64","u16","u64","u64"],
+            customTypes: ["TurnStatus","GameMove","GameMove"],
+          },
+        }
+      );
+    })(),
+    Gen1RandomMoveSet: (() => {
+      return defineComponent(
+        world,
+        { blob_id: RecsType.Number, move_1: RecsType.Number, move_2: RecsType.Number, move_3: RecsType.Number, move_4: RecsType.Number },
+        {
+          metadata: {
+            name: "Gen1RandomMoveSet",
+            types: ["u32","u16","u16","u16","u16"],
+            customTypes: [],
+          },
+        }
+      );
+    })(),
+    MoveBook: (() => {
+      return defineComponent(
+        world,
+        { move_id: RecsType.Number, accuracy: RecsType.Number, basepower: RecsType.Number, category: RecsType.Number, name: RecsType.BigInt, pp: RecsType.Number, priority: RecsType.Number, secondary: RecsType.Number, target: RecsType.Number, moveSystemCallBack: RecsType.Number, flags: RecsType.Number },
+        {
+          metadata: {
+            name: "MoveBook",
+            types: ["u16","u8","u16","enum","felt252","u16","u8","u16","enum","u16","u16"],
+            customTypes: ["MoveCategory","MoveTarget"],
+          },
+        }
+      );
+    })(),
+    Lineup: (() => {
+      return defineComponent(
+        world,
+        { player_id: RecsType.BigInt, game_id: RecsType.BigInt, slot1: RecsType.Number, slot2: RecsType.Number, slot3: RecsType.Number, slot4: RecsType.Number, slot5: RecsType.Number, slot6: RecsType.Number },
+        {
+          metadata: {
+            name: "Lineup",
+            types: ["contractaddress","u128","u32","u32","u32","u32","u32","u32"],
+            customTypes: [],
+          },
+        }
+      );
+    })(),
+    Player: (() => {
+      return defineComponent(
+        world,
+        { player_id: RecsType.BigInt, name: RecsType.BigInt, profile_pic: RecsType.Number, total_duels: RecsType.Number, total_wins: RecsType.Number, total_losses: RecsType.Number, ranking: RecsType.BigInt, timestamp: RecsType.BigInt },
+        {
+          metadata: {
+            name: "Player",
+            types: ["contractaddress","felt252","u16","u16","u16","u16","u256","u64"],
+            customTypes: [],
+          },
+        }
+      );
+    })(),
+  };
 }

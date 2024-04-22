@@ -3,6 +3,7 @@
 import { Account, AccountInterface } from "starknet";
 import { DojoProvider } from "@dojoengine/core";
 import { Direction } from "../../utils";
+import { BigNumber } from "ethers";
 
 export type IWorld = Awaited<ReturnType<typeof setupWorld>>;
 
@@ -11,37 +12,201 @@ export interface MoveProps {
     direction: Direction;
 }
 
-export async function setupWorld(provider: DojoProvider) {
-    function actions() {
-        const contract_name = "actions";
+export interface RegisterPlayerProps {
+    account: Account | AccountInterface;
+    name: string;
+    profile_pic: number;
+}
 
-        const spawn = async ({ account }: { account: AccountInterface }) => {
+export async function setupWorld(provider: DojoProvider) {
+    // function actions() {
+    //     const contract_name = "actions";
+
+    //     const spawn = async ({ account }: { account: AccountInterface }) => {
+    //         try {
+    //             return await provider.execute(
+    //                 account,
+    //                 contract_name,
+    //                 "spawn",
+    //                 []
+    //             );
+    //         } catch (error) {
+    //             console.error("Error executing spawn:", error);
+    //             throw error;
+    //         }
+    //     };
+
+    //     const move = async ({ account, direction }: MoveProps) => {
+    //         try {
+    //             return await provider.execute(account, contract_name, "move", [
+    //                 direction,
+    //             ]);
+    //         } catch (error) {
+    //             console.error("Error executing move:", error);
+    //             throw error;
+    //         }
+    //     };
+    //     return { spawn, move };
+    // }
+
+    function lobby(){
+        const contract_name = "lobby";
+
+        const register_player = async ({ account, name, profile_pic }: RegisterPlayerProps) => {
             try {
                 return await provider.execute(
                     account,
                     contract_name,
-                    "spawn",
-                    []
+                    "register_player",
+                    [name, profile_pic]
                 );
             } catch (error) {
-                console.error("Error executing spawn:", error);
+                console.error("Error executing register:", error);
                 throw error;
             }
         };
 
-        const move = async ({ account, direction }: MoveProps) => {
+        const set_profilepic = async ({ account, profile_pic }: 
+            { account: Account | AccountInterface, profile_pic: number }) => {
             try {
-                return await provider.execute(account, contract_name, "move", [
-                    direction,
-                ]);
+                return await provider.execute(
+                    account,
+                    contract_name,
+                    "set_profilepic",
+                    [profile_pic]
+                );
             } catch (error) {
-                console.error("Error executing move:", error);
+                console.error("Error executing set_profilepic:", error);
                 throw error;
             }
         };
-        return { spawn, move };
+
+        const set_full_lineup = async ({ account, game_id, 
+            slot1, slot2, slot3, slot4, slot5, slot6 }:
+            { account: Account | AccountInterface, 
+                game_id: BigInt, 
+                slot1: number, slot2: number, slot3: number, 
+                slot4: number, slot5: number, slot6: number
+             }) => {
+            try {
+                return await provider.execute(
+                    account,
+                    contract_name,
+                    "set_full_lineup",
+                    [game_id, slot1, slot2, slot3, slot4, slot5, slot6]
+                );
+            } catch (error) {
+                console.error("Error executing set_full_lineup:", error);
+                throw error;
+            }
+        }
+
+        const create_battle_room = async ({ account, 
+            turn_expiry, total_turn_time}:
+            { account: Account | AccountInterface, 
+                turn_expiry: number, total_turn_time: number }) => {
+            try {
+                return await provider.execute(
+                    account,
+                    contract_name,
+                    "create_battle_room",
+                    [turn_expiry, total_turn_time]
+                );
+            }
+            catch (error) {
+                console.error("Error executing create_battle_room:", error);
+                throw error;
+            }
+        }
+
+        const challenge_player = async ({ account, target_player,
+            turn_expiry, total_turn_time, challenge_expiry}:
+            { account: Account | AccountInterface, target_player: bigint,
+                turn_expiry: number, total_turn_time: number, challenge_expiry: number }) => {
+            try {
+                return await provider.execute(
+                    account,
+                    contract_name,
+                    "challenge_player",
+                    [target_player, turn_expiry, total_turn_time, challenge_expiry]
+                );
+            }
+            catch (error) {
+                console.error("Error executing challenge_player:", error);
+                throw error;
+            }
+        }
+
+        const accept_challenge = async ({ account, game_id }:
+            { account: Account | AccountInterface, game_id: number }) => {
+            try {
+                return await provider.execute(
+                    account,
+                    contract_name,
+                    "accept_challenge",
+                    [game_id]
+                );
+            }
+            catch (error) {
+                console.error("Error executing accept_challenge:", error);
+                throw error;
+            }
+        }
+
+        return { 
+            register_player,
+            set_profilepic,
+            set_full_lineup,
+            create_battle_room,
+            challenge_player,
+            accept_challenge
+         };
     }
+
+    function registry(){
+        const contract_name = "registry";
+
+        const create_blobert = async ({ 
+                account, 
+                    blob_id,
+                    name,
+                    randomlvl,
+                    hp,
+                    atk,
+                    def,
+                    spa,
+                    spd,
+                    spe }:
+                { account: Account | AccountInterface, 
+                    blob_id: number,
+                    name: string,
+                    randomlvl: number,
+                    hp: number,
+                    atk: number,
+                    def: number,
+                    spa: number,
+                    spd: number,
+                    spe: number 
+                }
+            ) => {
+            try {
+                return await provider.execute(
+                    account,
+                    contract_name,
+                    "register",
+                    [blob_id, name, randomlvl, 
+                        hp, atk, def, spa, spd, spe]
+                );
+            } catch (error) {
+                console.error("Error executing register:", error);
+                throw error;
+            }
+        };
+    }
+
     return {
-        actions: actions(),
+        //actions: actions(),
+        lobby: lobby(),
+        registry: registry(),
     };
 }
