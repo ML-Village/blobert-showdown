@@ -41,9 +41,9 @@ struct Turn {
     #[key]
     game_id: u128,
     #[key]
-    turn_status: u8,
+    turn: u8,
     //---------------
-    state: u8,      // turn state
+    turn_status: TurnStatus,      // turn state
     move_a: GameMove,   // player_a move
     move_b: GameMove,   // player_b move
 
