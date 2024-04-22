@@ -169,38 +169,50 @@
   },
   {
     "type": "impl",
-    "name": "gen_1_random_move_setImpl",
-    "interface_name": "dojo_starter::models::moves::Igen_1_random_move_set"
+    "name": "lineupImpl",
+    "interface_name": "dojo_starter::models::player::Ilineup"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::Gen1RandomMoveSet",
+    "name": "dojo_starter::models::player::Lineup",
     "members": [
       {
-        "name": "blob_id",
+        "name": "player_id",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "game_id",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "slot1",
         "type": "core::integer::u32"
       },
       {
-        "name": "move_1",
-        "type": "core::integer::u16"
+        "name": "slot2",
+        "type": "core::integer::u32"
       },
       {
-        "name": "move_2",
-        "type": "core::integer::u16"
+        "name": "slot3",
+        "type": "core::integer::u32"
       },
       {
-        "name": "move_3",
-        "type": "core::integer::u16"
+        "name": "slot4",
+        "type": "core::integer::u32"
       },
       {
-        "name": "move_4",
-        "type": "core::integer::u16"
+        "name": "slot5",
+        "type": "core::integer::u32"
+      },
+      {
+        "name": "slot6",
+        "type": "core::integer::u32"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Igen_1_random_move_set",
+    "name": "dojo_starter::models::player::Ilineup",
     "items": [
       {
         "type": "function",
@@ -208,7 +220,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::Gen1RandomMoveSet"
+            "type": "dojo_starter::models::player::Lineup"
           }
         ],
         "outputs": [],
@@ -218,7 +230,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::gen_1_random_move_set::Event",
+    "name": "dojo_starter::models::player::lineup::Event",
     "kind": "enum",
     "variants": []
   }

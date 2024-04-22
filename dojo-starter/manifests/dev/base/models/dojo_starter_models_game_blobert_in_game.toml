@@ -1,8 +1,8 @@
 kind = "DojoModel"
-class_hash = "0x4ec1f85ba8ab622ef4d0845a60c45809ba06862b4fd8a8076b1c85475419dab"
-original_class_hash = "0x4ec1f85ba8ab622ef4d0845a60c45809ba06862b4fd8a8076b1c85475419dab"
-abi = "manifests/dev/abis/base/models/dojo_starter_models_game_poke_in_game.json"
-name = "dojo_starter::models::game::poke_in_game"
+class_hash = "0x5403c99d2a5022be2078e42a512d16626b3ca04bf838c957a0b991f229be44a"
+original_class_hash = "0x5403c99d2a5022be2078e42a512d16626b3ca04bf838c957a0b991f229be44a"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_game_blobert_in_game.json"
+name = "dojo_starter::models::game::blobert_in_game"
 
 [[members]]
 name = "game_id"
@@ -20,7 +20,7 @@ type = "u8"
 key = true
 
 [[members]]
-name = "pokemon_id"
+name = "blob_id"
 type = "u32"
 key = false
 
@@ -121,5 +121,5 @@ key = false
 
 [[members]]
 name = "status"
-type = "PokeGameStatus"
+type = "BlobertGameStatus"
 key = false

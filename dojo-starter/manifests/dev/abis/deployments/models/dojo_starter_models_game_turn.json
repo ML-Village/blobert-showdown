@@ -169,38 +169,64 @@
   },
   {
     "type": "impl",
-    "name": "gen_1_random_move_setImpl",
-    "interface_name": "dojo_starter::models::moves::Igen_1_random_move_set"
+    "name": "turnImpl",
+    "interface_name": "dojo_starter::models::game::Iturn"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::Gen1RandomMoveSet",
+    "name": "dojo_starter::models::game::GameMove",
     "members": [
       {
-        "name": "blob_id",
-        "type": "core::integer::u32"
+        "name": "hash",
+        "type": "core::integer::u64"
       },
       {
-        "name": "move_1",
-        "type": "core::integer::u16"
+        "name": "salt",
+        "type": "core::integer::u64"
       },
       {
-        "name": "move_2",
-        "type": "core::integer::u16"
-      },
-      {
-        "name": "move_3",
-        "type": "core::integer::u16"
-      },
-      {
-        "name": "move_4",
+        "name": "move",
         "type": "core::integer::u16"
       }
     ]
   },
   {
+    "type": "struct",
+    "name": "dojo_starter::models::game::Turn",
+    "members": [
+      {
+        "name": "game_id",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "turn_status",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "state",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move_a",
+        "type": "dojo_starter::models::game::GameMove"
+      },
+      {
+        "name": "move_b",
+        "type": "dojo_starter::models::game::GameMove"
+      },
+      {
+        "name": "timestamp_start",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "timestamp_end",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Igen_1_random_move_set",
+    "name": "dojo_starter::models::game::Iturn",
     "items": [
       {
         "type": "function",
@@ -208,7 +234,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::Gen1RandomMoveSet"
+            "type": "dojo_starter::models::game::Turn"
           }
         ],
         "outputs": [],
@@ -218,7 +244,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::gen_1_random_move_set::Event",
+    "name": "dojo_starter::models::game::turn::Event",
     "kind": "enum",
     "variants": []
   }

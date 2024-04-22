@@ -177,7 +177,7 @@
     "name": "dojo_starter::models::moves::Gen1RandomMoveSet",
     "members": [
       {
-        "name": "blob_id",
+        "name": "poke_id",
         "type": "core::integer::u32"
       },
       {

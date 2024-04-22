@@ -169,38 +169,162 @@
   },
   {
     "type": "impl",
-    "name": "gen_1_random_move_setImpl",
-    "interface_name": "dojo_starter::models::moves::Igen_1_random_move_set"
+    "name": "blobert_in_gameImpl",
+    "interface_name": "dojo_starter::models::game::Iblobert_in_game"
+  },
+  {
+    "type": "enum",
+    "name": "dojo_starter::models::moves::SideEffect",
+    "variants": [
+      {
+        "name": "Burn",
+        "type": "()"
+      },
+      {
+        "name": "Paralyzed",
+        "type": "()"
+      },
+      {
+        "name": "Frozen",
+        "type": "()"
+      },
+      {
+        "name": "Sleep",
+        "type": "()"
+      },
+      {
+        "name": "Poison",
+        "type": "()"
+      },
+      {
+        "name": "Confusion",
+        "type": "()"
+      },
+      {
+        "name": "Flinch",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "dojo_starter::models::game::BlobertGameStatus",
+    "variants": [
+      {
+        "name": "Alive",
+        "type": "()"
+      },
+      {
+        "name": "Fainted",
+        "type": "()"
+      }
+    ]
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::Gen1RandomMoveSet",
+    "name": "dojo_starter::models::game::BlobertInGame",
     "members": [
+      {
+        "name": "game_id",
+        "type": "core::integer::u32"
+      },
+      {
+        "name": "player_id",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "slot",
+        "type": "core::integer::u8"
+      },
       {
         "name": "blob_id",
         "type": "core::integer::u32"
       },
       {
-        "name": "move_1",
+        "name": "lvl",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "hp",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_2",
+        "name": "atk",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_3",
+        "name": "def",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_4",
+        "name": "spa",
         "type": "core::integer::u16"
+      },
+      {
+        "name": "spd",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spe",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move1",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move1_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move2",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move2_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move3",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move3_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "move4",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "move4_limit",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "side_effect1",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "side_effect2",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "side_effect3",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "side_effect4",
+        "type": "dojo_starter::models::moves::SideEffect"
+      },
+      {
+        "name": "status",
+        "type": "dojo_starter::models::game::BlobertGameStatus"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Igen_1_random_move_set",
+    "name": "dojo_starter::models::game::Iblobert_in_game",
     "items": [
       {
         "type": "function",
@@ -208,7 +332,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::Gen1RandomMoveSet"
+            "type": "dojo_starter::models::game::BlobertInGame"
           }
         ],
         "outputs": [],
@@ -218,7 +342,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::gen_1_random_move_set::Event",
+    "name": "dojo_starter::models::game::blobert_in_game::Event",
     "kind": "enum",
     "variants": []
   }

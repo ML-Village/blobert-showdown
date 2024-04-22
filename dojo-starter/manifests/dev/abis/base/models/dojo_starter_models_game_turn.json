@@ -173,6 +173,28 @@
     "interface_name": "dojo_starter::models::game::Iturn"
   },
   {
+    "type": "enum",
+    "name": "dojo_starter::models::game::TurnStatus",
+    "variants": [
+      {
+        "name": "Null",
+        "type": "()"
+      },
+      {
+        "name": "Commit",
+        "type": "()"
+      },
+      {
+        "name": "Reveal",
+        "type": "()"
+      },
+      {
+        "name": "Finish",
+        "type": "()"
+      }
+    ]
+  },
+  {
     "type": "struct",
     "name": "dojo_starter::models::game::GameMove",
     "members": [
@@ -199,12 +221,12 @@
         "type": "core::integer::u128"
       },
       {
-        "name": "turn_status",
+        "name": "turn",
         "type": "core::integer::u8"
       },
       {
-        "name": "state",
-        "type": "core::integer::u8"
+        "name": "turn_status",
+        "type": "dojo_starter::models::game::TurnStatus"
       },
       {
         "name": "move_a",

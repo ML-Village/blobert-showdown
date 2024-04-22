@@ -169,38 +169,108 @@
   },
   {
     "type": "impl",
-    "name": "gen_1_random_move_setImpl",
-    "interface_name": "dojo_starter::models::moves::Igen_1_random_move_set"
+    "name": "gameImpl",
+    "interface_name": "dojo_starter::models::game::Igame"
+  },
+  {
+    "type": "enum",
+    "name": "dojo_starter::models::game::GameStatus",
+    "variants": [
+      {
+        "name": "Null",
+        "type": "()"
+      },
+      {
+        "name": "Awaiting",
+        "type": "()"
+      },
+      {
+        "name": "Withdrawn",
+        "type": "()"
+      },
+      {
+        "name": "Refused",
+        "type": "()"
+      },
+      {
+        "name": "Expired",
+        "type": "()"
+      },
+      {
+        "name": "InProgress",
+        "type": "()"
+      },
+      {
+        "name": "Ended",
+        "type": "()"
+      }
+    ]
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::Gen1RandomMoveSet",
+    "name": "dojo_starter::models::game::Game",
     "members": [
       {
-        "name": "blob_id",
-        "type": "core::integer::u32"
+        "name": "game_id",
+        "type": "core::integer::u128"
       },
       {
-        "name": "move_1",
+        "name": "player_a",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "player_b",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "player_a_active_slot",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "player_b_active_slot",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "turn",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_2",
-        "type": "core::integer::u16"
+        "name": "game_status",
+        "type": "dojo_starter::models::game::GameStatus"
       },
       {
-        "name": "move_3",
-        "type": "core::integer::u16"
+        "name": "winner",
+        "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "move_4",
-        "type": "core::integer::u16"
+        "name": "winner_slot",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "turn_expiry",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "challenge_expiry",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "total_turn_time",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "timestamp_start",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "timestamp_end",
+        "type": "core::integer::u64"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Igen_1_random_move_set",
+    "name": "dojo_starter::models::game::Igame",
     "items": [
       {
         "type": "function",
@@ -208,7 +278,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::Gen1RandomMoveSet"
+            "type": "dojo_starter::models::game::Game"
           }
         ],
         "outputs": [],
@@ -218,7 +288,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::gen_1_random_move_set::Event",
+    "name": "dojo_starter::models::game::game::Event",
     "kind": "enum",
     "variants": []
   }

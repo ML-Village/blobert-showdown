@@ -64,10 +64,10 @@
     "items": [
       {
         "type": "function",
-        "name": "create_blobert",
+        "name": "create_pokemon",
         "inputs": [
           {
-            "name": "blob_id",
+            "name": "pokemon_id",
             "type": "core::integer::u32"
           },
           {

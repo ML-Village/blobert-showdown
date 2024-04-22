@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x3471fcd6c7743e035749bb863ec773ee48ffc550b92652c26b8c9cf63310682"
-original_class_hash = "0x3471fcd6c7743e035749bb863ec773ee48ffc550b92652c26b8c9cf63310682"
+class_hash = "0x4765e33e9b636dac0aa09508055bbdab85ee16df13f89588082a58350b295e5"
+original_class_hash = "0x4765e33e9b636dac0aa09508055bbdab85ee16df13f89588082a58350b295e5"
 abi = "manifests/dev/abis/base/models/dojo_starter_models_game_turn.json"
 name = "dojo_starter::models::game::turn"
 
@@ -10,13 +10,13 @@ type = "u128"
 key = true
 
 [[members]]
-name = "turn_status"
+name = "turn"
 type = "u8"
 key = true
 
 [[members]]
-name = "state"
-type = "u8"
+name = "turn_status"
+type = "TurnStatus"
 key = false
 
 [[members]]

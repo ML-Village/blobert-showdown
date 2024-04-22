@@ -1,11 +1,11 @@
 kind = "DojoModel"
-class_hash = "0x3072eefe19669381eadd321adef9b868f267adcf6065789c4503c001d5dcdd8"
-original_class_hash = "0x3072eefe19669381eadd321adef9b868f267adcf6065789c4503c001d5dcdd8"
+class_hash = "0x3e832afbfbed229ba0c9f6dfde859889f20694a91e773960eca372b064fdea5"
+original_class_hash = "0x3e832afbfbed229ba0c9f6dfde859889f20694a91e773960eca372b064fdea5"
 abi = "manifests/dev/abis/base/models/dojo_starter_models_moves_gen_1_random_move_set.json"
 name = "dojo_starter::models::moves::gen_1_random_move_set"
 
 [[members]]
-name = "poke_id"
+name = "blob_id"
 type = "u32"
 key = true
 

@@ -55,52 +55,124 @@
   },
   {
     "type": "impl",
-    "name": "RegistryImpl",
-    "interface_name": "dojo_starter::systems::registry::IRegistry"
+    "name": "LobbyImpl",
+    "interface_name": "dojo_starter::systems::lobby::ILobby"
   },
   {
     "type": "interface",
-    "name": "dojo_starter::systems::registry::IRegistry",
+    "name": "dojo_starter::systems::lobby::ILobby",
     "items": [
       {
         "type": "function",
-        "name": "create_blobert",
+        "name": "register_player",
         "inputs": [
-          {
-            "name": "blob_id",
-            "type": "core::integer::u32"
-          },
           {
             "name": "name",
             "type": "core::felt252"
           },
           {
-            "name": "randomlvl",
-            "type": "core::integer::u8"
+            "name": "profile_pic",
+            "type": "core::integer::u16"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "set_profilepic",
+        "inputs": [
+          {
+            "name": "profile_pic",
+            "type": "core::integer::u16"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "set_full_lineup",
+        "inputs": [
+          {
+            "name": "game_id",
+            "type": "core::integer::u128"
           },
           {
-            "name": "hp",
-            "type": "core::integer::u16"
+            "name": "slot1",
+            "type": "core::integer::u32"
           },
           {
-            "name": "atk",
-            "type": "core::integer::u16"
+            "name": "slot2",
+            "type": "core::integer::u32"
           },
           {
-            "name": "def",
-            "type": "core::integer::u16"
+            "name": "slot3",
+            "type": "core::integer::u32"
           },
           {
-            "name": "spa",
-            "type": "core::integer::u16"
+            "name": "slot4",
+            "type": "core::integer::u32"
           },
           {
-            "name": "spd",
-            "type": "core::integer::u16"
+            "name": "slot5",
+            "type": "core::integer::u32"
           },
           {
-            "name": "spe",
-            "type": "core::integer::u16"
+            "name": "slot6",
+            "type": "core::integer::u32"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "create_battle_room",
+        "inputs": [
+          {
+            "name": "turn_expiry",
+            "type": "core::integer::u64"
+          },
+          {
+            "name": "total_turn_time",
+            "type": "core::integer::u64"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "challenge_player",
+        "inputs": [
+          {
+            "name": "target_player",
+            "type": "core::starknet::contract_address::ContractAddress"
+          },
+          {
+            "name": "turn_expiry",
+            "type": "core::integer::u64"
+          },
+          {
+            "name": "total_turn_time",
+            "type": "core::integer::u64"
+          },
+          {
+            "name": "challenge_expiry",
+            "type": "core::integer::u64"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "accept_challenge",
+        "inputs": [
+          {
+            "name": "game_id",
+            "type": "core::integer::u128"
           }
         ],
         "outputs": [],
@@ -157,7 +229,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::systems::registry::registry::Event",
+    "name": "dojo_starter::systems::lobby::lobby::Event",
     "kind": "enum",
     "variants": [
       {

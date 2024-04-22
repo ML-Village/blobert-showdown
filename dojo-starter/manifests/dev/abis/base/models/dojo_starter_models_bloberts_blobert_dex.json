@@ -169,38 +169,54 @@
   },
   {
     "type": "impl",
-    "name": "gen_1_random_move_setImpl",
-    "interface_name": "dojo_starter::models::moves::Igen_1_random_move_set"
+    "name": "blobert_dexImpl",
+    "interface_name": "dojo_starter::models::bloberts::Iblobert_dex"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::Gen1RandomMoveSet",
+    "name": "dojo_starter::models::bloberts::BlobertDex",
     "members": [
       {
         "name": "blob_id",
         "type": "core::integer::u32"
       },
       {
-        "name": "move_1",
+        "name": "name",
+        "type": "core::felt252"
+      },
+      {
+        "name": "randomlvl",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "hp",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_2",
+        "name": "atk",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_3",
+        "name": "def",
         "type": "core::integer::u16"
       },
       {
-        "name": "move_4",
+        "name": "spa",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spd",
+        "type": "core::integer::u16"
+      },
+      {
+        "name": "spe",
         "type": "core::integer::u16"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Igen_1_random_move_set",
+    "name": "dojo_starter::models::bloberts::Iblobert_dex",
     "items": [
       {
         "type": "function",
@@ -208,7 +224,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::Gen1RandomMoveSet"
+            "type": "dojo_starter::models::bloberts::BlobertDex"
           }
         ],
         "outputs": [],
@@ -218,7 +234,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::gen_1_random_move_set::Event",
+    "name": "dojo_starter::models::bloberts::blobert_dex::Event",
     "kind": "enum",
     "variants": []
   }

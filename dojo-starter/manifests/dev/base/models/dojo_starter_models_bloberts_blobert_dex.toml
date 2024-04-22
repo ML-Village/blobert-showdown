@@ -1,11 +1,11 @@
 kind = "DojoModel"
-class_hash = "0x7bc439b8efd06c767e031031919e48eb00eaded23ce0198e4262dd0e6800fa2"
-original_class_hash = "0x7bc439b8efd06c767e031031919e48eb00eaded23ce0198e4262dd0e6800fa2"
-abi = "manifests/dev/abis/base/models/dojo_starter_models_pokemon_pokedex.json"
-name = "dojo_starter::models::pokemon::pokedex"
+class_hash = "0x50fbeece05d6b91d9e68efd7bd3c7e193161dc2c634d4243551f69fd0d58df7"
+original_class_hash = "0x50fbeece05d6b91d9e68efd7bd3c7e193161dc2c634d4243551f69fd0d58df7"
+abi = "manifests/dev/abis/base/models/dojo_starter_models_bloberts_blobert_dex.json"
+name = "dojo_starter::models::bloberts::blobert_dex"
 
 [[members]]
-name = "pokemon_id"
+name = "blob_id"
 type = "u32"
 key = true
 
