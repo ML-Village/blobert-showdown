@@ -12,8 +12,12 @@ echo "--------------------------------------------------------------------------
 
 # enable system -> models authorizations
 sozo auth grant --world $WORLD_ADDRESS --wait writer \
-  Position,dojo_starter::systems::actions::actions\
-  Moves,dojo_starter::systems::actions::actions\
+  Player,dojo_starter::systems::lobby::lobby\
+  Lineup,dojo_starter::systems::lobby::lobby\
+  Game,dojo_starter::systems::lobby::lobby\
+  BlobertDex,dojo_starter::systems::registry::registry\
+  MoveBook,dojo_starter::systems::registry::registry\
+  Gen1RandomMoveSet,dojo_starter::systems::registry::registry\
   >/dev/null
 
 echo "Default authorizations have been successfully set."
