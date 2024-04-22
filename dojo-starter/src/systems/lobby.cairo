@@ -18,7 +18,7 @@ trait ILobby {
         slot6: u32
     );
 
-    //fn set_pokemon(slot:u8, pokemon_id: u32);
+    //fn set_blobert(slot:u8, blob_id: u32);
     fn create_battle_room(
         turn_expiry: u64, 
         total_turn_time: u64);
@@ -38,7 +38,7 @@ mod lobby {
 
     use starknet::{ContractAddress, get_caller_address, get_block_timestamp};
     use dojo_starter::models::{player:: {Player, Lineup}};
-    use dojo_starter::models::{pokemon:: {Pokedex}};
+    use dojo_starter::models::{bloberts:: {BlobertDex}};
     use dojo_starter::models::{game:: {Game, GameStatus}};
     use dojo_starter::utils::{utils, seed_gen::{make_seed}};
 
@@ -99,26 +99,26 @@ mod lobby {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
-            //get the pokemon lineup of player
+            //get the blobert lineup of player
             let mut lineup: Lineup = get!(world, (caller,0), (Lineup));
 
-            //Get all the pokemon from 1-6 if they exist
-            let mut poke1: Pokedex = get!(world, slot1, (Pokedex));
-            let mut poke2: Pokedex = get!(world, slot2, (Pokedex));
-            let mut poke3: Pokedex = get!(world, slot3, (Pokedex));
-            let mut poke4: Pokedex = get!(world, slot4, (Pokedex));
-            let mut poke5: Pokedex = get!(world, slot5, (Pokedex));
-            let mut poke6: Pokedex = get!(world, slot6, (Pokedex));
+            //Get all the blobert from 1-6 if they exist
+            let mut blob1: BlobertDex = get!(world, slot1, (BlobertDex));
+            let mut blob2: BlobertDex = get!(world, slot2, (BlobertDex));
+            let mut blob3: BlobertDex = get!(world, slot3, (BlobertDex));
+            let mut blob4: BlobertDex = get!(world, slot4, (BlobertDex));
+            let mut blob5: BlobertDex = get!(world, slot5, (BlobertDex));
+            let mut blob6: BlobertDex = get!(world, slot6, (BlobertDex));
 
             //Do a check if its empty then its doesnt exist
-            assert(poke1.name != '', 'Pokemon not found in Dex');
-            assert(poke2.name != '', 'Pokemon not found in Dex');
-            assert(poke3.name != '', 'Pokemon not found in Dex');
-            assert(poke4.name != '', 'Pokemon not found in Dex');
-            assert(poke5.name != '', 'Pokemon not found in Dex');
-            assert(poke6.name != '', 'Pokemon not found in Dex');
+            assert(blob1.name != '', 'Blobert not found in Dex');
+            assert(blob2.name != '', 'Blobert not found in Dex');
+            assert(blob3.name != '', 'Blobert not found in Dex');
+            assert(blob4.name != '', 'Blobert not found in Dex');
+            assert(blob5.name != '', 'Blobert not found in Dex');
+            assert(blob6.name != '', 'Blobert not found in Dex');
 
-            //set the pokemon lineup
+            //set the blobert lineup
             lineup.slot1 = slot1;
             lineup.slot2 = slot2;
             lineup.slot3 = slot3;

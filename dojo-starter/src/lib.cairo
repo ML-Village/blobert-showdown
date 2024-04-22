@@ -5,7 +5,7 @@ mod systems {
 
 mod models {
     mod moves;
-    mod pokemon;
+    mod bloberts;
     mod player;
     mod game;
 }

@@ -1,10 +1,10 @@
-use dojo_starter::models::pokemon::Pokedex;
+use dojo_starter::models::bloberts::BlobertDex;
 
 #[dojo::interface]
 trait IRegistry {
 
-    fn create_pokemon(
-        pokemon_id: u32,
+    fn create_blobert(
+        blob_id: u32,
         name: felt252,
         randomlvl: u8,
         hp: u16,
@@ -20,12 +20,12 @@ trait IRegistry {
 mod registry {
     use super::{IRegistry};
     use starknet::{ContractAddress, get_caller_address};
-    use dojo_starter::models::{pokemon::{Pokedex}};
+    use dojo_starter::models::{bloberts::{BlobertDex}};
 
     #[abi(embed_v0)]
     impl RegistryImpl of IRegistry<ContractState> {
-        fn create_pokemon(world: IWorldDispatcher, 
-            pokemon_id: u32, 
+        fn create_blobert(world: IWorldDispatcher, 
+            blob_id: u32, 
             name: felt252,
             randomlvl: u8,
             hp: u16,
@@ -35,8 +35,8 @@ mod registry {
             spd: u16,
             spe: u16,
         ) {
-            let pokemon = Pokedex {
-                pokemon_id, 
+            let blobert = BlobertDex {
+                blob_id, 
                 name, 
                 randomlvl, 
                 hp, 
@@ -47,8 +47,7 @@ mod registry {
                 spe
             };
 
-            set!(world, (pokemon));
-            return ();
+            set!(world, (blobert));
         }
     }
 }

@@ -73,7 +73,7 @@ enum GameStatus {
 }
 
 #[derive(Model, Copy, Drop, Serde)]
-struct PokeInGame {
+struct BlobertInGame {
     #[key]
     game_id: u32,
     #[key]
@@ -81,7 +81,7 @@ struct PokeInGame {
     #[key]
     slot: u8,
 
-    pokemon_id: u32,
+    blob_id: u32,
 
     lvl: u8,
     hp: u16,
@@ -105,11 +105,11 @@ struct PokeInGame {
     side_effect3: SideEffect,
     side_effect4: SideEffect,
 
-    status: PokeGameStatus
+    status: BlobertGameStatus
 }
 
 #[derive(Copy, Drop, Serde, PartialEq, Introspect)]
-enum PokeGameStatus {
+enum BlobertGameStatus {
     Alive,
     Fainted,
 }

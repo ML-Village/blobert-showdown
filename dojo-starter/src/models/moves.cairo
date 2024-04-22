@@ -46,7 +46,7 @@ enum SideEffect {
 #[derive(Model, Copy, Drop, Serde)]
 struct Gen1RandomMoveSet {
     #[key]
-    poke_id: u32,
+    blob_id: u32,
     move_1: u16,
     move_2: u16,
     move_3: u16,
