@@ -3,7 +3,7 @@ use starknet::ContractAddress;
 #[derive(Model, Copy, Drop, Serde)]
 struct Pokedex {
     #[key]
-    poke_id: u32,
+    pokemon_id: u32,
     name: felt252,
     randomlvl: u8,
     hp: u16,

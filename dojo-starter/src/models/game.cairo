@@ -20,7 +20,7 @@ struct Game {
     // timestamps in unix epoch
     turn_expiry: u64,           // Unix time, time for each turn to expire (0 for unlimited)
     challenge_expiry: u64,      // Unix time, time for challenge to expire (0 for unlimited)
-    total_game_time: u64,       // Unix time, total game time (0 for unlimited)
+    total_turn_time: u64,       // Unix time, total game time (0 for unlimited)
     timestamp_start: u64,       // Unix time, started
     timestamp_end: u64,         // Unix time, ended
 }
@@ -81,7 +81,7 @@ struct PokeInGame {
     #[key]
     slot: u8,
 
-    pokeid: u32,
+    pokemon_id: u32,
 
     lvl: u8,
     hp: u16,

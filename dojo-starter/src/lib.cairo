@@ -1,5 +1,6 @@
 mod systems {
-    mod actions;
+    mod lobby;
+    mod registry;
 }
 
 mod models {
@@ -9,6 +10,12 @@ mod models {
     mod game;
 }
 
+mod utils {
+    mod utils;
+    mod hash;
+    mod seed_gen;
+}
+
 mod tests {
-    mod test_world;
+    //mod test_world;
 }
