@@ -5,24 +5,20 @@ use dojo_starter::models::moves::{SideEffect};
 struct Game {
     #[key]
     game_id: u128,
-
     player_a: ContractAddress, // challenger
     player_b: ContractAddress, // challenged
-
     player_a_active_slot: u8,
     player_b_active_slot: u8,
-
     turn: u16, // turn number
     game_status: GameStatus,
     winner: ContractAddress,
     winner_slot: u8, // 0: unknown, 1: player a, 2: player b, 3: technical error
-
     // timestamps in unix epoch
-    turn_expiry: u64,           // Unix time, time for each turn to expire (0 for unlimited)
-    challenge_expiry: u64,      // Unix time, time for challenge to expire (0 for unlimited)
-    total_turn_time: u64,       // Unix time, total game time (0 for unlimited)
-    timestamp_start: u64,       // Unix time, started
-    timestamp_end: u64,         // Unix time, ended
+    turn_expiry: u64, // Unix time, time for each turn to expire (0 for unlimited)
+    challenge_expiry: u64, // Unix time, time for challenge to expire (0 for unlimited)
+    total_turn_time: u64, // Unix time, total game time (0 for unlimited)
+    timestamp_start: u64, // Unix time, started
+    timestamp_end: u64, // Unix time, ended
 }
 
 //
@@ -30,9 +26,9 @@ struct Game {
 #[derive(Copy, Drop, Serde, Introspect)]
 struct GameMove {
     // player input
-    hash: u64,          // hashed action (salt + action)
-    salt: u64,          // the player's secret salt
-    move: u16,        // the player's chosen action 
+    hash: u64, // hashed action (salt + action)
+    salt: u64, // the player's secret salt
+    move: u16, // the player's chosen action 
 } // 224 bits
 
 // Each duel round
@@ -43,13 +39,12 @@ struct Turn {
     #[key]
     turn: u8,
     //---------------
-    turn_status: TurnStatus,      // turn state
-    move_a: GameMove,   // player_a move
-    move_b: GameMove,   // player_b move
-
+    turn_status: TurnStatus, // turn state
+    move_a: GameMove, // player_a move
+    move_b: GameMove, // player_b move
     // timestamps in unix epoch
-    timestamp_start: u64,       // Unix time, started
-    timestamp_end: u64,         // Unix time, ended
+    timestamp_start: u64, // Unix time, started
+    timestamp_end: u64, // Unix time, ended
 } // (8 + 224 + 224) = 456 bits ~ 2 felts (max 504)
 
 
@@ -75,14 +70,12 @@ enum GameStatus {
 #[derive(Model, Copy, Drop, Serde)]
 struct BlobertInGame {
     #[key]
-    game_id: u32,
+    game_id: u128,
     #[key]
     player_id: ContractAddress,
     #[key]
     slot: u8,
-
     blob_id: u32,
-
     lvl: u8,
     hp: u16,
     atk: u16,
@@ -90,7 +83,6 @@ struct BlobertInGame {
     spa: u16,
     spd: u16,
     spe: u16,
-
     move1: u16,
     move1_limit: u8,
     move2: u16,
@@ -99,12 +91,10 @@ struct BlobertInGame {
     move3_limit: u8,
     move4: u16,
     move4_limit: u8,
-
     side_effect1: SideEffect,
     side_effect2: SideEffect,
     side_effect3: SideEffect,
     side_effect4: SideEffect,
-
     status: BlobertGameStatus
 }
 

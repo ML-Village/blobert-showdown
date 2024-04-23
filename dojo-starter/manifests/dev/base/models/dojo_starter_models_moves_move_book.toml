@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x3afdcf3ad31b70748e851bda321187c8a66b5703d115519bf20561af7db89ae"
-original_class_hash = "0x3afdcf3ad31b70748e851bda321187c8a66b5703d115519bf20561af7db89ae"
+class_hash = "0x371aede8f794b03e800783520f91b1721ec92e56378219f420ec60b6c38f2b6"
+original_class_hash = "0x371aede8f794b03e800783520f91b1721ec92e56378219f420ec60b6c38f2b6"
 abi = "manifests/dev/abis/base/models/dojo_starter_models_moves_move_book.json"
 name = "dojo_starter::models::moves::move_book"
 
@@ -47,6 +47,11 @@ key = false
 [[members]]
 name = "target"
 type = "MoveTarget"
+key = false
+
+[[members]]
+name = "move_limit"
+type = "u8"
 key = false
 
 [[members]]

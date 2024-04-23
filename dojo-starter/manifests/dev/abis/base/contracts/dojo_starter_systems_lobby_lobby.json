@@ -80,7 +80,7 @@
       },
       {
         "type": "function",
-        "name": "set_profilepic",
+        "name": "set_profile_pic",
         "inputs": [
           {
             "name": "profile_pic",
@@ -229,12 +229,189 @@
   },
   {
     "type": "event",
+    "name": "dojo_starter::types::events::PlayerRegistered",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "name",
+        "type": "core::felt252",
+        "kind": "data"
+      },
+      {
+        "name": "profile_pic",
+        "type": "core::integer::u16",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "dojo_starter::types::events::ProfilePicSet",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "profile_pic",
+        "type": "core::integer::u16",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "dojo_starter::types::events::LineupSet",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "slot1",
+        "type": "core::integer::u32",
+        "kind": "data"
+      },
+      {
+        "name": "slot2",
+        "type": "core::integer::u32",
+        "kind": "data"
+      },
+      {
+        "name": "slot3",
+        "type": "core::integer::u32",
+        "kind": "data"
+      },
+      {
+        "name": "slot4",
+        "type": "core::integer::u32",
+        "kind": "data"
+      },
+      {
+        "name": "slot5",
+        "type": "core::integer::u32",
+        "kind": "data"
+      },
+      {
+        "name": "slot6",
+        "type": "core::integer::u32",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "dojo_starter::types::events::BattleRoomCreated",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "game_id",
+        "type": "core::integer::u128",
+        "kind": "data"
+      },
+      {
+        "name": "turn_expiry",
+        "type": "core::integer::u64",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "dojo_starter::types::events::PlayerChallenged",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "game_id",
+        "type": "core::integer::u128",
+        "kind": "data"
+      },
+      {
+        "name": "turn_expiry",
+        "type": "core::integer::u64",
+        "kind": "data"
+      },
+      {
+        "name": "challenge_expiry",
+        "type": "core::integer::u64",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "dojo_starter::types::events::ChallengeAccepted",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "game_id",
+        "type": "core::integer::u128",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
     "name": "dojo_starter::systems::lobby::lobby::Event",
     "kind": "enum",
     "variants": [
       {
         "name": "UpgradeableEvent",
         "type": "dojo::components::upgradeable::upgradeable::Event",
+        "kind": "nested"
+      },
+      {
+        "name": "PlayerRegistered",
+        "type": "dojo_starter::types::events::PlayerRegistered",
+        "kind": "nested"
+      },
+      {
+        "name": "ProfilePicSet",
+        "type": "dojo_starter::types::events::ProfilePicSet",
+        "kind": "nested"
+      },
+      {
+        "name": "LineupSet",
+        "type": "dojo_starter::types::events::LineupSet",
+        "kind": "nested"
+      },
+      {
+        "name": "BattleRoomCreated",
+        "type": "dojo_starter::types::events::BattleRoomCreated",
+        "kind": "nested"
+      },
+      {
+        "name": "PlayerChallenged",
+        "type": "dojo_starter::types::events::PlayerChallenged",
+        "kind": "nested"
+      },
+      {
+        "name": "ChallengedAccepted",
+        "type": "dojo_starter::types::events::ChallengeAccepted",
         "kind": "nested"
       }
     ]

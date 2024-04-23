@@ -1,14 +1,14 @@
 use starknet::{ContractAddress};
 use dojo_starter::models::player::{Player, Lineup};
 
-#[dojo::interface]
-trait ILobby {
+#[starknet::interface]
+trait ILobby<TContractState> {
+    fn register_player(self: @TContractState, name: felt252, profile_pic: u16);
 
-    fn register_player(name: felt252, profile_pic: u16);
-
-    fn set_profilepic(profile_pic: u16);
+    fn set_profile_pic(self: @TContractState, profile_pic: u16);
 
     fn set_full_lineup(
+        self: @TContractState,
         game_id: u128,
         slot1: u32,
         slot2: u32,
@@ -19,17 +19,16 @@ trait ILobby {
     );
 
     //fn set_blobert(slot:u8, blob_id: u32);
-    fn create_battle_room(
-        turn_expiry: u64, 
-        total_turn_time: u64);
+    fn create_battle_room(self: @TContractState, turn_expiry: u64, total_turn_time: u64);
 
     fn challenge_player(
-        target_player: ContractAddress, 
-        turn_expiry: u64, 
+        self: @TContractState,
+        target_player: ContractAddress,
+        turn_expiry: u64,
         total_turn_time: u64,
         challenge_expiry: u64,
-        );
-    fn accept_challenge(game_id: u128);
+    );
+    fn accept_challenge(self: @TContractState, game_id: u128);
 }
 
 #[dojo::contract]
@@ -37,19 +36,32 @@ mod lobby {
     use super::{ILobby};
 
     use starknet::{ContractAddress, get_caller_address, get_block_timestamp};
-    use dojo_starter::models::{player:: {Player, Lineup}};
-    use dojo_starter::models::{bloberts:: {BlobertDex}};
-    use dojo_starter::models::{game:: {Game, GameStatus}};
+    use dojo_starter::models::{player::{Player, Lineup}};
+    use dojo_starter::models::{bloberts::{BlobertDex}};
+    use dojo_starter::models::{game::{Game, GameStatus}};
     use dojo_starter::utils::{utils, seed_gen::{make_seed}};
+    use dojo_starter::types::events;
+    use dojo_starter::systems::{utils as util};
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        PlayerRegistered: events::PlayerRegistered,
+        ProfilePicSet: events::ProfilePicSet,
+        LineupSet: events::LineupSet,
+        BattleRoomCreated: events::BattleRoomCreated,
+        PlayerChallenged: events::PlayerChallenged,
+        ChallengedAccepted: events::ChallengeAccepted
+    }
 
     #[abi(embed_v0)]
     impl LobbyImpl of ILobby<ContractState> {
-        fn register_player(world:IWorldDispatcher, name: felt252, profile_pic: u16) {
+        fn register_player(self: @ContractState, name: felt252, profile_pic: u16) {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
-            let mut player = get!(world, caller, (Player));
-            let mut lineup = get!(world, (caller,0), (Lineup));
+            let mut player = get!(self.world(), caller, (Player));
+            let mut lineup = get!(self.world(), (caller, 0), (Lineup));
 
             //player.player_id = caller;
             player.name = name;
@@ -72,22 +84,25 @@ mod lobby {
             lineup.slot5 = 0;
             lineup.slot6 = 0;
 
-            set!(world, (player, lineup));
+            set!(self.world(), (player, lineup));
 
-            // TODO: emit event?
+            emit!(self.world(), events::PlayerRegistered { player: caller, name, profile_pic })
         }
 
-        fn set_profilepic(world: IWorldDispatcher, profile_pic: u16) {
+        fn set_profile_pic(self: @ContractState, profile_pic: u16) {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
-            let mut player = get!(world, caller, (Player));
+            let mut player = get!(self.world(), caller, (Player));
             player.profile_pic = profile_pic;
 
-            set!(world, (player));
+            set!(self.world(), (player));
+
+            emit!(self.world(), events::ProfilePicSet { player: caller, profile_pic })
         }
 
-        fn set_full_lineup(world: IWorldDispatcher,
+        fn set_full_lineup(
+            self: @ContractState,
             game_id: u128,
             slot1: u32,
             slot2: u32,
@@ -100,15 +115,15 @@ mod lobby {
             let caller = get_caller_address();
 
             //get the blobert lineup of player
-            let mut lineup: Lineup = get!(world, (caller,0), (Lineup));
+            let mut lineup: Lineup = get!(self.world(), (caller, 0), (Lineup));
 
             //Get all the blobert from 1-6 if they exist
-            let mut blob1: BlobertDex = get!(world, slot1, (BlobertDex));
-            let mut blob2: BlobertDex = get!(world, slot2, (BlobertDex));
-            let mut blob3: BlobertDex = get!(world, slot3, (BlobertDex));
-            let mut blob4: BlobertDex = get!(world, slot4, (BlobertDex));
-            let mut blob5: BlobertDex = get!(world, slot5, (BlobertDex));
-            let mut blob6: BlobertDex = get!(world, slot6, (BlobertDex));
+            let mut blob1: BlobertDex = get!(self.world(), slot1, (BlobertDex));
+            let mut blob2: BlobertDex = get!(self.world(), slot2, (BlobertDex));
+            let mut blob3: BlobertDex = get!(self.world(), slot3, (BlobertDex));
+            let mut blob4: BlobertDex = get!(self.world(), slot4, (BlobertDex));
+            let mut blob5: BlobertDex = get!(self.world(), slot5, (BlobertDex));
+            let mut blob6: BlobertDex = get!(self.world(), slot6, (BlobertDex));
 
             //Do a check if its empty then its doesnt exist
             assert(blob1.name != '', 'Blobert not found in Dex');
@@ -127,28 +142,31 @@ mod lobby {
             lineup.slot6 = slot6;
 
             //set the lineup state change
-            set!(world, (lineup));
+            set!(self.world(), (lineup));
+
+            emit!(
+                self.world(),
+                events::LineupSet { player: caller, slot1, slot2, slot3, slot4, slot5, slot6 }
+            )
         }
 
-        fn create_battle_room(world: IWorldDispatcher, 
-            turn_expiry: u64, 
-            total_turn_time: u64) 
-        {
+        fn create_battle_room(self: @ContractState, turn_expiry: u64, total_turn_time: u64) {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
             let game_id = make_seed(caller);
 
             //Check if the lineup is filled , if not revert
-            let lineup: Lineup = get!(world, (caller,0), (Lineup));
-            assert((
-                lineup.slot1 != 0 &&
-                lineup.slot2 != 0 &&
-                lineup.slot3 != 0 &&
-                lineup.slot4 != 0 &&
-                lineup.slot5 != 0 &&
-                lineup.slot6 != 0
-            ), 'Lineup is not ready');
+            let lineup: Lineup = get!(self.world(), (caller, 0), (Lineup));
+            assert(
+                (lineup.slot1 != 0
+                    && lineup.slot2 != 0
+                    && lineup.slot3 != 0
+                    && lineup.slot4 != 0
+                    && lineup.slot5 != 0
+                    && lineup.slot6 != 0),
+                'Lineup is not ready'
+            );
 
             //If all good then just create the new game
             let game = Game {
@@ -169,64 +187,73 @@ mod lobby {
             };
 
             //set the state change
-            set!(world, (game, 
-                Lineup {
-                    player_id: caller,
-                    game_id: game_id,
-                    slot1: lineup.slot1,
-                    slot2: lineup.slot2,
-                    slot3: lineup.slot3,
-                    slot4: lineup.slot4,
-                    slot5: lineup.slot5,
-                    slot6: lineup.slot6
-                }));
-            
-            // TODO: emit event?
+            set!(
+                self.world(),
+                (
+                    game,
+                    Lineup {
+                        player_id: caller,
+                        game_id: game_id,
+                        slot1: lineup.slot1,
+                        slot2: lineup.slot2,
+                        slot3: lineup.slot3,
+                        slot4: lineup.slot4,
+                        slot5: lineup.slot5,
+                        slot6: lineup.slot6
+                    }
+                )
+            );
 
+            emit!(self.world(), events::BattleRoomCreated { player: caller, game_id, turn_expiry })
         }
 
-        fn challenge_player(world:IWorldDispatcher, 
-            target_player: ContractAddress, 
-            turn_expiry: u64, 
+        fn challenge_player(
+            self: @ContractState,
+            target_player: ContractAddress,
+            turn_expiry: u64,
             total_turn_time: u64,
             challenge_expiry: u64,
-            ){
-                // Get the address of the current caller, possibly the player's address.
-                let caller = get_caller_address();
+        ) {
+            // Get the address of the current caller, possibly the player's address.
+            let caller = get_caller_address();
 
-                let game_id = make_seed(caller);
+            let game_id = make_seed(caller);
 
-                //Check if the lineup is filled , if not revert
-                let callerlineup: Lineup = get!(world, (caller,0), (Lineup));
-                assert((
-                    callerlineup.slot1 != 0 &&
-                    callerlineup.slot2 != 0 &&
-                    callerlineup.slot3 != 0 &&
-                    callerlineup.slot4 != 0 &&
-                    callerlineup.slot5 != 0 &&
-                    callerlineup.slot6 != 0
-                ), 'Lineup is not ready');
+            //Check if the lineup is filled , if not revert
+            let callerlineup: Lineup = get!(self.world(), (caller, 0), (Lineup));
+            assert(
+                (callerlineup.slot1 != 0
+                    && callerlineup.slot2 != 0
+                    && callerlineup.slot3 != 0
+                    && callerlineup.slot4 != 0
+                    && callerlineup.slot5 != 0
+                    && callerlineup.slot6 != 0),
+                'Lineup is not ready'
+            );
 
-                //If all good then just create the new game
-                let game = Game {
-                    game_id: game_id,
-                    player_a: caller,
-                    player_b: target_player,
-                    player_a_active_slot: 1,
-                    player_b_active_slot: 1,
-                    turn: 0,
-                    game_status: GameStatus::Awaiting,
-                    winner: utils::zero_address(),
-                    winner_slot: 0,
-                    turn_expiry: turn_expiry,
-                    challenge_expiry: 0,
-                    total_turn_time: total_turn_time,
-                    timestamp_start: get_block_timestamp(),
-                    timestamp_end: 0,
-                };
+            //If all good then just create the new game
+            let game = Game {
+                game_id: game_id,
+                player_a: caller,
+                player_b: target_player,
+                player_a_active_slot: 1,
+                player_b_active_slot: 1,
+                turn: 0,
+                game_status: GameStatus::Awaiting,
+                winner: utils::zero_address(),
+                winner_slot: 0,
+                turn_expiry: turn_expiry,
+                challenge_expiry: 0,
+                total_turn_time: total_turn_time,
+                timestamp_start: get_block_timestamp(),
+                timestamp_end: 0,
+            };
 
-                //set the state change
-                set!(world, (game, 
+            //set the state change
+            set!(
+                self.world(),
+                (
+                    game,
                     Lineup {
                         player_id: caller,
                         game_id: game_id,
@@ -236,49 +263,62 @@ mod lobby {
                         slot4: callerlineup.slot4,
                         slot5: callerlineup.slot5,
                         slot6: callerlineup.slot6
-                    }));
+                    }
+                )
+            );
 
-                // TODO: emit event?
-            
-            }
+            emit!(
+                self.world(),
+                events::PlayerChallenged { player: caller, game_id, turn_expiry, challenge_expiry }
+            )
+        }
 
-        
-        fn accept_challenge(world:IWorldDispatcher, game_id: u128){
+
+        fn accept_challenge(self: @ContractState, game_id: u128) {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
             //Get the game
-            let mut game = get!(world, game_id, (Game));
+            let mut game = get!(self.world(), game_id, (Game));
 
             // Check if target player is the caller
             assert(game.player_b == caller, 'Caller not Callenged Player');
 
+            game.game_status = GameStatus::InProgress;
+
             //Check if the challenged lineup is filled , if not revert
-            let callerlineup: Lineup = get!(world, (caller,0), (Lineup));
-            assert((
-                callerlineup.slot1 != 0 &&
-                callerlineup.slot2 != 0 &&
-                callerlineup.slot3 != 0 &&
-                callerlineup.slot4 != 0 &&
-                callerlineup.slot5 != 0 &&
-                callerlineup.slot6 != 0
-            ), 'Lineup is not ready');
+            let callerlineup: Lineup = get!(self.world(), (caller, 0), (Lineup));
+            assert(
+                (callerlineup.slot1 != 0
+                    && callerlineup.slot2 != 0
+                    && callerlineup.slot3 != 0
+                    && callerlineup.slot4 != 0
+                    && callerlineup.slot5 != 0
+                    && callerlineup.slot6 != 0),
+                'Lineup is not ready'
+            );
 
             //set the state change
-            set!(world, (game, 
-                Lineup {
-                    player_id: caller,
-                    game_id: game_id,
-                    slot1: callerlineup.slot1,
-                    slot2: callerlineup.slot2,
-                    slot3: callerlineup.slot3,
-                    slot4: callerlineup.slot4,
-                    slot5: callerlineup.slot5,
-                    slot6: callerlineup.slot6
-            }));
-            
-            // TODO: emit event?
+            set!(
+                self.world(),
+                (
+                    game,
+                    Lineup {
+                        player_id: caller,
+                        game_id: game_id,
+                        slot1: callerlineup.slot1,
+                        slot2: callerlineup.slot2,
+                        slot3: callerlineup.slot3,
+                        slot4: callerlineup.slot4,
+                        slot5: callerlineup.slot5,
+                        slot6: callerlineup.slot6
+                    }
+                )
+            );
 
+            util::battle_start(self.world(), game.player_a, game.player_b, game.game_id);
+
+            emit!(self.world(), events::ChallengeAccepted { player: caller, game_id })
         }
     }
 }

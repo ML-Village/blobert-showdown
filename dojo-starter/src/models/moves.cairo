@@ -12,6 +12,7 @@ struct MoveBook {
     priority: u8,
     secondary: u16,
     target: MoveTarget,
+    move_limit: u8,
     moveSystemCallBack: u16,
     flags: u16,
 }
@@ -34,6 +35,7 @@ enum MoveTarget {
 
 #[derive(Copy, Drop, Serde, PartialEq, Introspect)]
 enum SideEffect {
+    None,
     Burn,
     Paralyzed,
     Frozen,

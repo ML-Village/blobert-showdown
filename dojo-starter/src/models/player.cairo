@@ -20,7 +20,6 @@ struct Lineup {
     player_id: ContractAddress,
     #[key]
     game_id: u128,
-
     slot1: u32,
     slot2: u32,
     slot3: u32,
@@ -28,5 +27,4 @@ struct Lineup {
     slot5: u32,
     slot6: u32,
 }
-
 

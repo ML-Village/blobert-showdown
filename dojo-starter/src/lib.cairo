@@ -1,6 +1,7 @@
 mod systems {
     mod lobby;
     mod registry;
+    mod utils;
 }
 
 mod models {
@@ -16,6 +17,9 @@ mod utils {
     mod seed_gen;
 }
 
-mod tests {
-    //mod test_world;
+mod tests { //mod test_world;
+}
+
+mod types {
+    mod events;
 }

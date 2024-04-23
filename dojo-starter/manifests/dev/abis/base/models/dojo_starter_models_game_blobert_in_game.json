@@ -177,6 +177,10 @@
     "name": "dojo_starter::models::moves::SideEffect",
     "variants": [
       {
+        "name": "None",
+        "type": "()"
+      },
+      {
         "name": "Burn",
         "type": "()"
       },
@@ -226,7 +230,7 @@
     "members": [
       {
         "name": "game_id",
-        "type": "core::integer::u32"
+        "type": "core::integer::u128"
       },
       {
         "name": "player_id",
