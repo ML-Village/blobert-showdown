@@ -1,12 +1,13 @@
 import { Burner } from "@dojoengine/create-burner";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { publicBlobbersPath } from "../../constants/blobbers";
 import { feltToString, stringToFelt } from "../../utils/starknet";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { Entity } from "@dojoengine/recs";
+import { Entity, Has } from "@dojoengine/recs";
 import { useDojo } from "../../dojo/useDojo";
-import { useComponentValue } from "@dojoengine/react";
+import { useComponentValue, useEntityQuery } from "@dojoengine/react";
 import { ChooseBlobertModel } from "../PickBlobert";
+import { publicBlobertsPath } from "../../constants";
 
 export const BlobberCard = ({
   accountTarget,
@@ -21,20 +22,25 @@ export const BlobberCard = ({
 }) => {
   const {
     setup: {
-      systemCalls: { register }, // already return a function WRITE
-      clientComponents: { Player }, // return a client Component
+      systemCalls: { register_player }, // already return a function WRITE
+      clientComponents: { Player, Lineup }, // return a client Component
     },
     account,
   } = useDojo();
 
   // READ FUNCTION
+  // const has = useEntityQuery([Has(Player)]); // to check all entityid in a model
   const entityId = getEntityIdFromKeys([BigInt(burnerAddress)]) as Entity;
+  const entityId2 = getEntityIdFromKeys([
+    BigInt(burnerAddress),
+    BigInt(0),
+  ]) as Entity;
+  const lineup = useComponentValue(Lineup, entityId2);
   const player = useComponentValue(Player, entityId);
 
-  // const { name, total_duels, total_wins, total_losses } =
-  //   usePlayer(burnerAddress);
-  // const { register_player, choose_blobert, create_room_battle } =
-  //   useDojoSystemCalls();
+  console.log("lineup", lineup?.slot1);
+
+  const [openModal, setOpenModal] = useState(false);
 
   const handleRegisterName = () => {
     if (!nameInputValue) {
@@ -43,7 +49,7 @@ export const BlobberCard = ({
     }
 
     console.log(stringToFelt(nameInputValue));
-    register(account.account, nameInputValue, blobbersIndex);
+    register_player(account.account, nameInputValue, blobbersIndex);
     setNameInputValue(""); // Clear the input field
   };
 
@@ -53,25 +59,6 @@ export const BlobberCard = ({
   const handleNameInputChange = (e: any) => {
     setNameInputValue(e.target.value);
   };
-
-  // // blobert image config
-  // const { blobert_1, blobert_2, blobert_3, blobert_4, blobert_5, blobert_6 } =
-  //   useBlobertLineup(burnerAddress);
-
-  // useEffect(() => {
-  //   console.log(
-  //     "BLOBERT LINE UP",
-  //     blobert_1,
-  //     blobert_2,
-  //     blobert_3,
-  //     blobert_4,
-  //     blobert_5,
-  //     blobert_6
-  //   );
-  // });
-
-  // modal config
-  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div
@@ -157,69 +144,63 @@ export const BlobberCard = ({
           <div className="flex grid-cols-6 gap-1 justify-between w-full mx-1 px-1">
             <img
               className="h-20 border rounded-lg"
-              // src={
-              //   Number(blobert_1) === 0
-              //     ? "/pc.png"
-              //     : publicBlobertsPath[
-              //         (Number(blobert_1) - 1) % publicBlobertsPath.length
-              //       ]
-              // }
-              src={"./pc.png"}
+              src={
+                lineup?.slot1 === undefined || lineup?.slot1 === 0
+                  ? "/pc.png"
+                  : publicBlobertsPath[
+                      (Number(lineup?.slot1) - 1) % publicBlobertsPath.length
+                    ]
+              }
             />
             <img
               className="h-20 border rounded-lg"
-              // src={
-              //   Number(blobert_2) === 0
-              //     ? "/pc.png"
-              //     : publicBlobertsPath[
-              //         (Number(blobert_2) - 1) % publicBlobertsPath.length
-              //       ]
-              // }
-              src={"./pc.png"}
+              src={
+                lineup?.slot2 === undefined || lineup?.slot1 === 0
+                  ? "/pc.png"
+                  : publicBlobertsPath[
+                      (Number(lineup?.slot2) - 1) % publicBlobertsPath.length
+                    ]
+              }
             />
             <img
               className="h-20 border rounded-lg"
-              // src={
-              //   Number(blobert_3) === 0
-              //     ? "/pc.png"
-              //     : publicBlobertsPath[
-              //         (Number(blobert_3) - 1) % publicBlobertsPath.length
-              //       ]
-              // }
-              src={"./pc.png"}
+              src={
+                lineup?.slot3 === undefined || lineup?.slot1 === 0
+                  ? "/pc.png"
+                  : publicBlobertsPath[
+                      (Number(lineup?.slot3) - 1) % publicBlobertsPath.length
+                    ]
+              }
             />
             <img
               className="h-20 border rounded-lg"
-              // src={
-              //   Number(blobert_4) === 0
-              //     ? "/pc.png"
-              //     : publicBlobertsPath[
-              //         (Number(blobert_4) - 1) % publicBlobertsPath.length
-              //       ]
-              // }
-              src={"./pc.png"}
+              src={
+                lineup?.slot4 === undefined || lineup?.slot1 === 0
+                  ? "/pc.png"
+                  : publicBlobertsPath[
+                      (Number(lineup?.slot4) - 1) % publicBlobertsPath.length
+                    ]
+              }
             />
             <img
               className="h-20 border rounded-lg"
-              // src={
-              //   Number(blobert_5) === 0
-              //     ? "/pc.png"
-              //     : publicBlobertsPath[
-              //         (Number(blobert_5) - 1) % publicBlobertsPath.length
-              //       ]
-              // }
-              src={"./pc.png"}
+              src={
+                lineup?.slot5 === undefined || lineup?.slot1 === 0
+                  ? "/pc.png"
+                  : publicBlobertsPath[
+                      (Number(lineup?.slot5) - 1) % publicBlobertsPath.length
+                    ]
+              }
             />
             <img
               className="h-20 border rounded-lg"
-              // src={
-              //   Number(blobert_6) === 0
-              //     ? "/pc.png"
-              //     : publicBlobertsPath[
-              //         (Number(blobert_6) - 1) % publicBlobertsPath.length
-              //       ]
-              // }
-              src={"./pc.png"}
+              src={
+                lineup?.slot6 === undefined || lineup?.slot1 === 0
+                  ? "/pc.png"
+                  : publicBlobertsPath[
+                      (Number(lineup?.slot6) - 1) % publicBlobertsPath.length
+                    ]
+              }
             />
           </div>
 

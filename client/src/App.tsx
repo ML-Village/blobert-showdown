@@ -10,7 +10,7 @@ import BlobberCarousel from "./components/Carousel/BlobberCarousel";
 function App() {
   const {
     setup: {
-      systemCalls: { register }, // already return a function (WRITE)
+      systemCalls: { register_player}, // already return a function (WRITE)
       clientComponents: { Player }, // return a client Component
     },
     account,
@@ -23,7 +23,7 @@ function App() {
 
   const player = useComponentValue(Player, entityId);
 
-  console.log("player", player);
+  console.log("PlAYER", player);
 
   return (
     <>
@@ -78,15 +78,17 @@ function App() {
           </button>
         </div>
 
-         {/* Blobbers carousel */}
-      <div className="my-2">
-        <BlobberCarousel />
+        {/* Blobbers carousel */}
+        <div className="my-2">
+          <BlobberCarousel />
+        </div>
+
+        {/* <button className=" bg-white" onClick={()=>{set_full_lineup(account.account,0,1,2,3,4,5,6)}}>
+          Apply
+        </button> */}
       </div>
 
-
-      </div>
-
-      {/* Example */}      
+      {/* Example */}
       <div className=" min-h-screen flex items-center justify-center flex-col">
         <button onClick={() => account.create()}> Create</button>
         <button onClick={() => account.clear()}> Clear</button>
@@ -105,7 +107,7 @@ function App() {
             })}
           </select>
         </div>
-        <button onClick={() => register(account.account, "cliff", 1)}>
+        <button onClick={() => register_player(account.account, "cliff", 1)}>
           Register
         </button>
         <span>{feltToString(String(player?.name ?? "")) ?? ""}</span>

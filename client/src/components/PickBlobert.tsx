@@ -2,7 +2,6 @@ import { CustomFlowbiteTheme, Modal, Progress } from "flowbite-react";
 import { useState } from "react";
 import { publicBlobertsPath } from "../constants";
 import { useDojo } from "../dojo/useDojo";
-// import { useDojoAccount, useDojoSystemCalls } from "../dojo/DojoContext";
 
 const customModalTheme: CustomFlowbiteTheme["modal"] = {
   root: {
@@ -54,7 +53,7 @@ export const ChooseBlobertModel: React.FC<ChooseBlobertModelProps> = ({
 
   const {
     setup: {
-      systemCalls: { register }, // already return a function (WRITE)
+      systemCalls: { set_full_lineup }, // already return a function (WRITE)
       clientComponents: { Player }, // return a client Component
     },
     account,
@@ -62,21 +61,21 @@ export const ChooseBlobertModel: React.FC<ChooseBlobertModelProps> = ({
 
   // const { choose_blobert } = useDojoSystemCalls();
   // const { account } = useDojoAccount();
-  
 
   const handleRegisterLineUp = () => {
     alert(
       `Selected Blobert Indexes: ${selectedBlobert1}, ${selectedBlobert2}, ${selectedBlobert3}, ${selectedBlobert4}, ${selectedBlobert5}, ${selectedBlobert6}`
     );
-    // choose_blobert(
-    //   account,
-    //   (selectedBlobert1 + 1),
-    //   (selectedBlobert2 + 1),
-    //   (selectedBlobert3 + 1),
-    //   (selectedBlobert4 + 1),
-    //   (selectedBlobert5 + 1),
-    //   (selectedBlobert6 + 1)
-    // );
+    set_full_lineup(
+      account.account,
+      0,
+      selectedBlobert1 + 1,
+      selectedBlobert2 + 1,
+      selectedBlobert3 + 1,
+      selectedBlobert4 + 1,
+      selectedBlobert5 + 1,
+      selectedBlobert6 + 1
+    );
   };
 
   return (
