@@ -10,7 +10,11 @@ export default {
   ],
 
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        dogica: ["DogicaPixel", "sans-serif"],
+      },
+    },
   },
   plugins: [
     flowbite.plugin(),
