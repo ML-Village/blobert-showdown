@@ -1,9 +1,9 @@
 use dojo_starter::models::bloberts::BlobertDex;
 
-#[dojo::interface]
-trait IRegistry {
-
+#[starknet::interface]
+trait IRegistry<TContractState> {
     fn create_blobert(
+        self: @TContractState,
         blob_id: u32,
         name: felt252,
         randomlvl: u8,
@@ -24,8 +24,9 @@ mod registry {
 
     #[abi(embed_v0)]
     impl RegistryImpl of IRegistry<ContractState> {
-        fn create_blobert(world: IWorldDispatcher, 
-            blob_id: u32, 
+        fn create_blobert(
+            self: @ContractState,
+            blob_id: u32,
             name: felt252,
             randomlvl: u8,
             hp: u16,
@@ -35,19 +36,9 @@ mod registry {
             spd: u16,
             spe: u16,
         ) {
-            let blobert = BlobertDex {
-                blob_id, 
-                name, 
-                randomlvl, 
-                hp, 
-                atk,
-                def,
-                spa,
-                spd,
-                spe
-            };
+            let blobert = BlobertDex { blob_id, name, randomlvl, hp, atk, def, spa, spd, spe };
 
-            set!(world, (blobert));
+            set!(self.world(), (blobert));
         }
     }
 }
