@@ -6,6 +6,7 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { Entity } from "@dojoengine/recs";
 import { useDojo } from "../../dojo/useDojo";
 import { useComponentValue } from "@dojoengine/react";
+import { ChooseBlobertModel } from "../PickBlobert";
 
 export const BlobberCard = ({
   accountTarget,
@@ -20,14 +21,14 @@ export const BlobberCard = ({
 }) => {
   const {
     setup: {
-      systemCalls: { register }, // already return a function (WRITE)
+      systemCalls: { register }, // already return a function WRITE
       clientComponents: { Player }, // return a client Component
     },
     account,
   } = useDojo();
 
+  // READ FUNCTION
   const entityId = getEntityIdFromKeys([BigInt(burnerAddress)]) as Entity;
-
   const player = useComponentValue(Player, entityId);
 
   // const { name, total_duels, total_wins, total_losses } =
@@ -71,22 +72,11 @@ export const BlobberCard = ({
 
   // modal config
   const [openModal, setOpenModal] = useState(false);
-  const [selectedBlobert, setSelectedBlobert] = useState("notblobby");
-  const [targetSlot, setTargetSlot] = useState(0);
-
-  const [slotImagePath, setSlotImagePath] = useState({
-    0: { path: "/pc.png", index: 0 },
-    1: { path: "/pc.png", index: 0 },
-    2: { path: "/pc.png", index: 0 },
-    3: { path: "/pc.png", index: 0 },
-    4: { path: "/pc.png", index: 0 },
-    5: { path: "/pc.png", index: 0 },
-  });
 
   return (
     <div
       className={`${selected ? "border-2 border-yellow-400" : "border border-white"}
-        rounded-lg p-4 bg-orange-200/30 w-[880px] flex items-center`}
+        rounded-lg p-4 bg-orange-200/30 w-[880px] flex items-center mb-2`}
     >
       {/* profile image */}
       <div
@@ -236,14 +226,13 @@ export const BlobberCard = ({
           <button
             className="bg-orange-300 shrink px-2 py-2 border rounded-lg text-wrap text-sm"
             onClick={() => setOpenModal(true)}
-            disabled
           >
             configure Blobert Line-up
           </button>
-          {/* <ChooseBlobertModel
+          <ChooseBlobertModel
             openModal={openModal}
             setOpenModal={setOpenModal}
-          /> */}
+          />
         </div>
       </div>
     </div>
