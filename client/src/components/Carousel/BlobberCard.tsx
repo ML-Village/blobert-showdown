@@ -38,7 +38,9 @@ export const BlobberCard = ({
   const lineup = useComponentValue(Lineup, entityId2);
   const player = useComponentValue(Player, entityId);
 
-  console.log("lineup", lineup?.slot1);
+
+  // console log
+  console.log("LINEUP", lineup?.slot1);
 
   const [openModal, setOpenModal] = useState(false);
 

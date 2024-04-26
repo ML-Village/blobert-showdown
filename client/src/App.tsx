@@ -23,6 +23,7 @@ function App() {
 
   const player = useComponentValue(Player, entityId);
 
+  // Console log
   console.log("PlAYER", player);
 
   return (

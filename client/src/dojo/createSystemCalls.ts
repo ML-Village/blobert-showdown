@@ -47,6 +47,36 @@ export function createSystemCalls(
     }
   };
 
+  const set_profile_pic = async (
+    account: AccountInterface,
+    profile_pic: number
+  ) => {
+    try {
+      const { transaction_hash } = await client.lobby.set_profile_pic({
+        account,
+        profile_pic,
+      });
+
+      console.log(
+        await account.waitForTransaction(transaction_hash, {
+          retryInterval: 100,
+        })
+      );
+
+      setComponentsFromEvents(
+        contractComponents,
+        getEvents(
+          await account.waitForTransaction(transaction_hash, {
+            retryInterval: 100,
+          })
+        )
+      );
+    } catch (e) {
+      console.log(e);
+    } finally {
+    }
+  };
+
   const set_full_lineup = async (
     account: AccountInterface,
     game_id: number,
@@ -87,8 +117,132 @@ export function createSystemCalls(
     }
   };
 
+  const create_battle_room = async (
+    account: AccountInterface,
+    turn_expiry: number,
+    total_turn_time: number
+  ) => {
+    try {
+      const { transaction_hash } = await client.lobby.create_battle_room({
+        account,
+        turn_expiry,
+        total_turn_time,
+      });
+
+      console.log(
+        await account.waitForTransaction(transaction_hash, {
+          retryInterval: 100,
+        })
+      );
+
+      setComponentsFromEvents(
+        contractComponents,
+        getEvents(
+          await account.waitForTransaction(transaction_hash, {
+            retryInterval: 100,
+          })
+        )
+      );
+    } catch (e) {
+      console.log(e);
+    } finally {
+    }
+  };
+
+  const challenge_player = async (
+    account: AccountInterface,
+    target_player: bigint,
+    turn_expiry: number,
+    total_turn_time: number,
+    challenge_expiry: number
+  ) => {
+    try {
+      const { transaction_hash } = await client.lobby.challenge_player({
+        account,
+        target_player,
+        turn_expiry,
+        total_turn_time,
+        challenge_expiry,
+      });
+
+      console.log(
+        await account.waitForTransaction(transaction_hash, {
+          retryInterval: 100,
+        })
+      );
+
+      setComponentsFromEvents(
+        contractComponents,
+        getEvents(
+          await account.waitForTransaction(transaction_hash, {
+            retryInterval: 100,
+          })
+        )
+      );
+    } catch (e) {
+      console.log(e);
+      //Game.removeOverride(gameId);
+    } finally {
+      //Game.removeOverride(gameId);
+    }
+  };
+
+  const accept_challenge = async (
+    account: AccountInterface,
+    game_id: number
+  ) => {
+    const entityId = getEntityIdFromKeys([BigInt(account.address)]) as Entity;
+
+    // const gameId = uuid();
+    // Game.addOverride(gameId, {
+    //     entity: entityId,
+    //     value: {
+    //         game_id: game_id,
+    //         player1: player1,
+    //         player2: player2,
+    //         turn: 0,
+    //         turn_status: 0,
+    //         move_a: { hash: BigInt(0), salt: BigInt(0), move: 0 },
+    //         move_b: { hash: BigInt(0), salt: BigInt(0), move: 0 },
+    //         timestamp_start: BigInt(Date.now()),
+    //         timestamp_end: BigInt(Date.now()),
+    //     },
+    // });
+
+    try {
+      const { transaction_hash } = await client.lobby.accept_challenge({
+        account,
+        game_id,
+      });
+
+      console.log(
+        await account.waitForTransaction(transaction_hash, {
+          retryInterval: 100,
+        })
+      );
+
+      setComponentsFromEvents(
+        contractComponents,
+        getEvents(
+          await account.waitForTransaction(transaction_hash, {
+            retryInterval: 100,
+          })
+        )
+      );
+    } catch (e) {
+      console.log(e);
+      //Game.removeOverride(gameId);
+    } finally {
+      //Game.removeOverride(gameId);
+    }
+  };
+
   return {
     register_player,
-    set_full_lineup
+    set_profile_pic,
+    set_full_lineup,
+    create_battle_room,
+    challenge_player,
+    accept_challenge
   };
 }

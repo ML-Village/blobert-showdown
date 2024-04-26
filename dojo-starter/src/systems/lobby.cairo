@@ -28,6 +28,7 @@ trait ILobby<TContractState> {
         total_turn_time: u64,
         challenge_expiry: u64,
     );
+    
     fn accept_challenge(self: @TContractState, game_id: u128);
 }
 
