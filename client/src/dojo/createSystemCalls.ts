@@ -1,10 +1,5 @@
 import { AccountInterface } from "starknet";
-import { Entity, getComponentValue } from "@dojoengine/recs";
-import { uuid } from "@latticexyz/utils";
-import { ClientComponents } from "./createClientComponents";
-import { Direction, updatePositionWithDirection } from "../utils";
 import {
-  getEntityIdFromKeys,
   getEvents,
   setComponentsFromEvents,
 } from "@dojoengine/utils";
@@ -191,24 +186,6 @@ export function createSystemCalls(
     account: AccountInterface,
     game_id: number
   ) => {
-    const entityId = getEntityIdFromKeys([BigInt(account.address)]) as Entity;
-
-    // const gameId = uuid();
-    // Game.addOverride(gameId, {
-    //     entity: entityId,
-    //     value: {
-    //         game_id: game_id,
-    //         player1: player1,
-    //         player2: player2,
-    //         turn: 0,
-    //         turn_status: 0,
-    //         move_a: { hash: BigInt(0), salt: BigInt(0), move: 0 },
-    //         move_b: { hash: BigInt(0), salt: BigInt(0), move: 0 },
-    //         timestamp_start: BigInt(Date.now()),
-    //         timestamp_end: BigInt(Date.now()),
-    //     },
-    // });
-
     try {
       const { transaction_hash } = await client.lobby.accept_challenge({
         account,
