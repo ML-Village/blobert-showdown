@@ -1,6 +1,7 @@
 mod systems {
     mod lobby;
     mod registry;
+    mod game;
     mod utils;
 }
 
