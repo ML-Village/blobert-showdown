@@ -37,12 +37,8 @@ export const BlobberCard = ({
   ]) as Entity;
   const lineup = useComponentValue(Lineup, entityId2);
   const player = useComponentValue(Player, entityId);
-
-
   // console log
   console.log("LINEUP", lineup?.slot1);
-
-  const [openModal, setOpenModal] = useState(false);
 
   const handleRegisterName = () => {
     if (!nameInputValue) {
@@ -61,6 +57,8 @@ export const BlobberCard = ({
   const handleNameInputChange = (e: any) => {
     setNameInputValue(e.target.value);
   };
+
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div

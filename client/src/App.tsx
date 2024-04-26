@@ -6,6 +6,7 @@ import { feltToString } from "./utils/starknet";
 import Navbar from "./components/Navbar";
 import { Spinner } from "flowbite-react";
 import BlobberCarousel from "./components/Carousel/BlobberCarousel";
+import { ShowdownList } from "./components/ShowdownList/ShowdownList";
 
 function App() {
   const {
@@ -20,7 +21,6 @@ function App() {
   const entityId = getEntityIdFromKeys([
     BigInt(account?.account.address),
   ]) as Entity;
-
   const player = useComponentValue(Player, entityId);
 
   // Console log
@@ -83,6 +83,17 @@ function App() {
         <div className="my-2">
           <BlobberCarousel />
         </div>
+
+        {/* Blobberlists and Battles */}
+        <div
+          className="border border-gray-400 rounded-lg 
+                mt-4
+                max-h-[72vh] flex flex-col overflow-auto
+                "
+        >
+          <ShowdownList />
+        </div>
+
 
         {/* <button className=" bg-white" onClick={()=>{set_full_lineup(account.account,0,1,2,3,4,5,6)}}>
           Apply
