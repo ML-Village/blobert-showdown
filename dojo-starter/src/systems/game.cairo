@@ -1,13 +1,10 @@
 use starknet::ContractAddress;
+use dojo_starter::models::game::{Game};
 
 #[starknet::interface]
 trait IGame<TContractState> {
-    fn choose_move(
-        self: @TContractState,
-        game_id: u128,
-        caller: ContractAddress,
-        enemy: ContractAddress,
-        move_id: u16
+    fn commit_move(
+        self: @TContractState, game_id: u128, caller: ContractAddress, turn: u16, hash: u64
     );
 }
 
@@ -16,40 +13,64 @@ mod game {
     use super::{IGame};
 
     use starknet::ContractAddress;
-    use dojo_starter::models::game::{BlobertInGame, Game};
+    use dojo_starter::models::game::{BlobertInGame, Game, Turn, GameMove, GameStatus, TurnStatus};
 
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {}
 
+    fn _assert_challenge(
+        self: @ContractState, caller: ContractAddress, game_id: u128, turn: u16
+    ) -> (Game, u8) {
+        let game: Game = get!(self.world(), game_id, Game);
+
+        // Assert Duelist is in the challenge
+        let player_number: u8 = if (game.player_a == caller) {
+            1
+        } else if (game.player_b == caller) {
+            2
+        } else {
+            0
+        };
+        assert(player_number == 1 || player_number == 2, 'Not your Challenge!');
+
+        // Correct Challenge state
+        assert(game.game_status == GameStatus::InProgress.into(), 'Challenge is not In Progress');
+        assert(game.turn == turn, 'Bad Round number');
+
+        (game, player_number)
+    }
+
+    fn process_game() {}
+
     #[abi(embed_v0)]
     impl GameImpl of IGame<ContractState> {
-        fn choose_move(
-            self: @ContractState,
-            game_id: u128,
-            caller: ContractAddress,
-            enemy: ContractAddress,
-            move_id: u16,
-            slot: u8
+        fn commit_move(
+            self: @ContractState, game_id: u128, caller: ContractAddress, turn: u16, hash: u64
         ) {
-            //step 1 get the current blobertInGame 
-            let blobert: BlobertInGame = get!(self.world(), (game_id, caller, slot), BlobertInGame);
-            let game: Game = get!(self.world(), game_id, Game);
-            assert(game.player_a != 0, 'Game is not found');
+            let caller: ContractAddress = starknet::get_caller_address();
 
-            if (move_id != 0) {
-                //This means the user used a move
-                if (caller == game.player_a) {
-                    //get the enemy's blobert 
-                    let enemy_blobert: BlobertInGame = get!(
-                        self.world(),
-                        (game_id, game.player_b, game.player_b_active_slot),
-                        BlobertInGame
-                    );
-                } else if (caller == game.player_b) {} else {}
-            //get the player enemy data 
-            } else { //This means the user is switching blobert
+            let (_game, player_number) = _assert_challenge(self, caller, game_id, turn);
+
+            let mut turn: Turn = get!(self.world(), (game_id, turn), Turn);
+
+            assert(turn.turn_status == TurnStatus::Commit.into(), 'Round not in Commit');
+
+            //store hash 
+            if (player_number == 1) {
+                assert(turn.move_a.hash == 0, 'Already Committed');
+                turn.move_a.hash = hash
+            } else if (player_number == 2) {
+                assert(turn.move_b.hash == 0, 'Already Committed');
+                turn.move_b.hash = hash
             }
+
+            //finish commit 
+            if (turn.move_a.hash != 0 && turn.move_b.hash != 0) {
+                turn.turn_status = TurnStatus::Reveal.into();
+            }
+
+            set!(self.world(), (turn));
         }
     }
 }
