@@ -36,7 +36,7 @@
 
 **Grouped by Type**
 <details>
-    <summary>👇Normie Bloberts <span class="icon">👇</span></summary>
+    <summary>👇<b style="padding: 0 10px;width: 200px;">Normie Bloberts</b><p>They are Bloberts who generally do not belieb in Crypto. They think crypto is a skem and are mostly clueless in life. The subscribe to various narratives in the traditional world that are deemed "safe" and "correct". Their actions often seem unjustified to the eyes of the crypto-natives. But if ones guard is lowered, the effects that come after, might be devastating.</p><span class="icon">👇</span></summary>
     <div>
         <table>
             <tr>
@@ -58,8 +58,8 @@
                 <td>Does not believe in blockchain or crypto. Hates all things crypto.</td>
                 <td>Buy Gold</td>
                 <td>Calls Gensler</td>
-                <td>Block Crypto Game</td>
-                <td>Crypto hurst the environment.</td>
+                <td>Block Crypto Game Listings</td>
+                <td>Crypto hurts the environment.</td>
             </tr>
             <tr>
                 <td>Furry-Bert</td>
@@ -67,10 +67,10 @@
                 <td>NORMIE</td>
                 <td>NFT-COLLECTOR</td>
                 <td>Identify as a Furry. Did not welcome notion of crypto in bullrun period of 2020-2021. Believes there are environmental issues with crytpo tech. Believe that games should not have crypto or blockchain tech in them. Believe that NFTs are theft on Artists and wastes energy. Have sinced warmed up to Crypto.</td>
-                <td>Block Crypto Game</td>
-                <td>Buy NFTs</td>
-                <td>Write Crypto Blog Post</td>
-                <td>Crypto hurst the environment.</td>
+                <td>Block Crypto Game Listings</td>
+                <td>Buy NFTs Floor</td>
+                <td>Furry Blogs Crypto</td>
+                <td>Crypto hurts the environment.</td>
             </tr>
             <tr>
                 <td>Confused-Bert</td>
@@ -84,11 +84,11 @@
                 <td>Crypto is a Skem!</td>
             </tr>
             <tr>
-                <td>Confused-Bert</td>
+                <td>Sheep-Bert</td>
                 <td><img src="../../public/bloberts/normie/sheep-bert.png" width="250px"/></td>
                 <td>Normie</td>
                 <td>Degen-Tradoor</td>
-                <td>Does not have an opinion. Follows whoever sounds right</td>
+                <td>Does not have an opinion. Sheepishly follows whoever sounds right.</td>
                 <td>Buy Gold</td>
                 <td>Copys Cramer</td>
                 <td>Copys Nancy</td>
@@ -99,7 +99,9 @@
 </details>
 
 <details >
-    <summary>👇NFT-Collectoor Bloberts <span class="icon">👇</span></summary>
+    <summary>👇
+    <b style="padding: 0 10px; width: 200px">NFT-Collectoor Bloberts</b><p>NFT-Collectoor Bloberts, are adept in the NFT purchasing space. They know the listing dates of the best projects and ways to get whitelisted. Some of them are active influential figures in Crypto-Tweeder and share their views on the space regularly. </p><span class="icon">👇</span>
+    </summary>
     <div>
         <table>
             <tr>
@@ -132,7 +134,7 @@
                 <td>Followed the trend of NFT buying. Bought into "based" project. Project not as expected</td>
                 <td>Buys Premium NFT</td>
                 <td>Camps for Whitelist</td>
-                <td>Adds NFT PFP</td>
+                <td>Adds new NFT PFP</td>
                 <td>Tweets NFT conviction</td>
             </tr>
             <tr>
@@ -162,7 +164,9 @@
 </details>
 
 <details >
-    <summary>👇Influenza Bloberts <span class="icon">👇</span></summary>
+    <summary>👇
+    <b style="padding: 0 10px; width: 200px;">Influenza Bloberts</b><p> The most vocal of all Bloberts. Influenza Bloberts amass huge followings on Crypto-Tweeder to earn a stable stream of social income. They shill their 'convictions' and thesis of the market climate. Where to profit. Sometimes they get quite successful and start bouts or challenges with one another.</p><span class="icon">👇</span>
+    </summary>
     <div>
         <table>
             <tr>
