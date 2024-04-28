@@ -1,11 +1,11 @@
 import { Burner } from "@dojoengine/create-burner";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { publicBlobbersPath } from "../../constants/blobbers";
 import { feltToString, stringToFelt } from "../../utils/starknet";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { Entity, Has } from "@dojoengine/recs";
+import { Entity, HasValue} from "@dojoengine/recs";
 import { useDojo } from "../../dojo/useDojo";
-import { useComponentValue, useEntityQuery } from "@dojoengine/react";
+import { useComponentValue, useEntityQuery} from "@dojoengine/react";
 import { ChooseBlobertModel } from "../PickBlobert";
 import { publicBlobertsPath } from "../../constants";
 
@@ -29,16 +29,16 @@ export const BlobberCard = ({
   } = useDojo();
 
   // READ FUNCTION
-  // const has = useEntityQuery([Has(Player)]); // to check all entityid in a model
-  const entityId = getEntityIdFromKeys([BigInt(burnerAddress)]) as Entity;
-  const entityId2 = getEntityIdFromKeys([
+  const playerEntityId = getEntityIdFromKeys([BigInt(burnerAddress)]) as Entity;
+  const player = useComponentValue(Player, playerEntityId);
+  const lineupEntityId = getEntityIdFromKeys([
     BigInt(burnerAddress),
     BigInt(0),
   ]) as Entity;
-  const lineup = useComponentValue(Lineup, entityId2);
-  const player = useComponentValue(Player, entityId);
-  // console log
-  console.log("LINEUP", lineup?.slot1);
+  const lineup = useComponentValue(Lineup, lineupEntityId);
+
+  // CONSOLE
+
 
   const handleRegisterName = () => {
     if (!nameInputValue) {
@@ -145,7 +145,9 @@ export const BlobberCard = ({
             <img
               className="h-20 border rounded-lg"
               src={
-                lineup?.slot1 === undefined || lineup?.slot1 === 0
+                lineup?.slot1 === undefined ||
+                lineup?.slot1 === 0 ||
+                isNaN(lineup?.slot1)
                   ? "/pc.png"
                   : publicBlobertsPath[
                       (Number(lineup?.slot1) - 1) % publicBlobertsPath.length
@@ -155,7 +157,9 @@ export const BlobberCard = ({
             <img
               className="h-20 border rounded-lg"
               src={
-                lineup?.slot2 === undefined || lineup?.slot1 === 0
+                lineup?.slot2 === undefined ||
+                lineup?.slot2 === 0 ||
+                isNaN(lineup?.slot2)
                   ? "/pc.png"
                   : publicBlobertsPath[
                       (Number(lineup?.slot2) - 1) % publicBlobertsPath.length
@@ -165,7 +169,9 @@ export const BlobberCard = ({
             <img
               className="h-20 border rounded-lg"
               src={
-                lineup?.slot3 === undefined || lineup?.slot1 === 0
+                lineup?.slot3 === undefined ||
+                lineup?.slot3 === 0 ||
+                isNaN(lineup?.slot3)
                   ? "/pc.png"
                   : publicBlobertsPath[
                       (Number(lineup?.slot3) - 1) % publicBlobertsPath.length
@@ -175,7 +181,9 @@ export const BlobberCard = ({
             <img
               className="h-20 border rounded-lg"
               src={
-                lineup?.slot4 === undefined || lineup?.slot1 === 0
+                lineup?.slot4 === undefined ||
+                lineup?.slot4 === 0 ||
+                isNaN(lineup?.slot4)
                   ? "/pc.png"
                   : publicBlobertsPath[
                       (Number(lineup?.slot4) - 1) % publicBlobertsPath.length
@@ -185,7 +193,9 @@ export const BlobberCard = ({
             <img
               className="h-20 border rounded-lg"
               src={
-                lineup?.slot5 === undefined || lineup?.slot1 === 0
+                lineup?.slot5 === undefined ||
+                lineup?.slot5 === 0 ||
+                isNaN(lineup?.slot5)
                   ? "/pc.png"
                   : publicBlobertsPath[
                       (Number(lineup?.slot5) - 1) % publicBlobertsPath.length
@@ -195,7 +205,9 @@ export const BlobberCard = ({
             <img
               className="h-20 border rounded-lg"
               src={
-                lineup?.slot6 === undefined || lineup?.slot1 === 0
+                lineup?.slot6 === undefined ||
+                lineup?.slot6 === 0 ||
+                isNaN(lineup?.slot6)
                   ? "/pc.png"
                   : publicBlobertsPath[
                       (Number(lineup?.slot6) - 1) % publicBlobertsPath.length

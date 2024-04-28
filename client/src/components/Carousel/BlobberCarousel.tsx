@@ -6,6 +6,9 @@ import { useDojo } from "../../dojo/useDojo";
 export default function BlobberCarousel() {
   const { account } = useDojo();
 
+  // console.log("account list:")
+  // console.log(account.list())
+
   return (
     <div
       className="h-[350px] flex flex-col border border-gray-400 rounded-xl overflow-hidden"

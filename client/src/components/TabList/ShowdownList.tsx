@@ -3,9 +3,10 @@ import { Tabs } from "flowbite-react";
 import { MdHistoryEdu, MdLiveTv } from "react-icons/md";
 import { FaUserNinja } from "react-icons/fa";
 import { GiBattleGear } from "react-icons/gi";
+import { MdMeetingRoom } from "react-icons/md";
 import type { CustomFlowbiteTheme } from "flowbite-react";
 
-import { BattleTable } from "./BattleTable/BattleTable";
+import { BattleTable } from "./BattleTable";
 
 const customTabsTheme: CustomFlowbiteTheme["tabs"] = {
   base: "flex flex-col",
@@ -71,31 +72,20 @@ export const ShowdownList = () => {
     <Tabs theme={customTabsTheme} aria-label="Showdowns List" style="underline">
       <Tabs.Item active title="World Blobbers" icon={FaUserNinja}>
         <div className="h-[35rem] overflow-y-auto">
-          <div className="overflow-x-auto">
-            <BattleTable />
-          </div>
+          <BattleTable />
         </div>
+      </Tabs.Item>
+      <Tabs.Item title="Open Rooms" icon={MdMeetingRoom}>
+        <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
       <Tabs.Item title="Your Showdowns" icon={GiBattleGear}>
-        <div className="h-[35rem] overflow-y-auto">
-          <div className="overflow-x-auto">
-            <BattleTable />
-          </div>
-        </div>
+        <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
       <Tabs.Item title="Live Showdowns" icon={MdLiveTv}>
-        <div className="h-[35rem] overflow-y-auto">
-          <div className="overflow-x-auto">
-            <BattleTable />
-          </div>
-        </div>
+        <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
       <Tabs.Item title="Past Showdowns" icon={MdHistoryEdu}>
-        <div className="h-[35rem] overflow-y-auto">
-          <div className="overflow-x-auto">
-            <BattleTable />
-          </div>
-        </div>
+        <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
     </Tabs>
   );

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, Modal } from "flowbite-react";
 import type { CustomFlowbiteTheme } from "flowbite-react";
-import {
-  sampleWorldBlobbers,
-  blobbersPath,
-  customBlobertArray,
-  customBlobertInfoObject,
-} from "../../../constants";
-import CurrentMatchTable from "./CurrentMatchTable";
+import { useDojo } from "../../dojo/useDojo";
+import { useEntityQuery } from "@dojoengine/react";
+import { Entity, Has, HasValue } from "@dojoengine/recs";
+import TableRows from "./TableRows";
+import { getEntityIdFromKeys } from "@dojoengine/utils";
 
 const customTableTheme: CustomFlowbiteTheme["table"] = {
   root: {
@@ -64,27 +62,23 @@ const customModalThem: CustomFlowbiteTheme["modal"] = {
 };
 
 export const BattleTable = () => {
-  const [openShowDownModal, setOpenShowDownModal] = useState(false);
-  const [selectedBlobber, setSelectedBlobber] = useState({
-    // sample blobber
-    id: 3,
-    name: "Picasso",
-    blobber: 4,
-    blob1: 13,
-    blob2: 14,
-    blob3: 15,
-    blob4: 16,
-    blob5: 17,
-    blob6: 18,
-    totalGames: 88,
-    winRate: "69%",
-  });
+  const {
+    setup: {
+      clientComponents: { Player, Lineup }, // return a client Component
+    },
+    account,
+  } = useDojo();
+
+  const hasPlayer = useEntityQuery([Has(Player)]); // to check all entityid in a model
+  console.log("HAS PLAYER ", hasPlayer);
+
+  // const [openShowDownModal, setOpenShowDownModal] = useState(false);
 
   return (
     <>
       <Table theme={customTableTheme} hoverable striped className="text-center">
         <Table.Head>
-          <Table.HeadCell className="text-left">Blobber Name</Table.HeadCell>
+          <Table.HeadCell>Blobber Name</Table.HeadCell>
 
           <Table.HeadCell>Blob1</Table.HeadCell>
           <Table.HeadCell>Blob2</Table.HeadCell>
@@ -98,93 +92,13 @@ export const BattleTable = () => {
         </Table.Head>
 
         <Table.Body className="divide-y">
-          {sampleWorldBlobbers.map((blobber, index) => (
-            <Table.Row
-              key={index}
-              onClick={() => {
-                setSelectedBlobber(() => blobber);
-                setOpenShowDownModal(true);
-              }}
-            >
-              <Table.Cell className="text-left whitespace-nowrap font-medium">
-                <div className="flex flex-col items-center justify-center">
-                  <img className="h-16" src={blobbersPath[blobber.blobber]} />
-                  <span>{blobber.name}</span>
-                </div>
-              </Table.Cell>
-
-              <Table.Cell>
-                <img
-                  className="h-14 rounded-md border border-gray-800"
-                  src={
-                    customBlobertInfoObject[customBlobertArray[blobber.blob1]]
-                      ?.path
-                  }
-                  alt=""
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <img
-                  className="h-14 rounded-md border border-gray-800"
-                  src={
-                    customBlobertInfoObject[customBlobertArray[blobber.blob2]]
-                      ?.path
-                  }
-                  alt=""
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <img
-                  className="h-14 rounded-md border border-gray-800"
-                  src={
-                    customBlobertInfoObject[customBlobertArray[blobber.blob3]]
-                      ?.path
-                  }
-                  alt=""
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <img
-                  className="h-14 rounded-md border border-gray-800"
-                  src={
-                    customBlobertInfoObject[customBlobertArray[blobber.blob4]]
-                      ?.path
-                  }
-                  alt=""
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <img
-                  className="h-14 rounded-md border border-gray-800"
-                  src={
-                    customBlobertInfoObject[customBlobertArray[blobber.blob5]]
-                      ?.path
-                  }
-                  alt=""
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <img
-                  className="h-14 rounded-md border border-gray-800"
-                  src={
-                    customBlobertInfoObject[customBlobertArray[blobber.blob6]]
-                      ?.path
-                  }
-                  alt=""
-                />
-              </Table.Cell>
-
-              <Table.Cell className="font-semibold">
-                {blobber.totalGames}
-              </Table.Cell>
-              <Table.Cell className="font-semibold">
-                {blobber.winRate}
-              </Table.Cell>
-            </Table.Row>
+          {hasPlayer.map((value, index) => (
+            <TableRows key={index} value={value} />
           ))}
         </Table.Body>
       </Table>
-      <Modal
+
+      {/* <Modal
         theme={customModalThem}
         dismissible
         position="top-center"
@@ -200,9 +114,9 @@ export const BattleTable = () => {
         </Modal.Header>
         <Modal.Body>
           <div className="flex flex-col items-start">
-            {/* blobbers and stats */}
+            blobbers and stats
             <div className="w-full flex justify-between items-center">
-              {/* blobbers div */}
+              blobbers div
               <div className="w-fit grid grid-cols-6 gap-2">
                 {[
                   selectedBlobber.blob1,
@@ -223,7 +137,7 @@ export const BattleTable = () => {
                 ))}
               </div>
 
-              {/* stats div */}
+              stats div
               <div className="mr-8">
                 <div className="flex flex-col items-end justify-center text-xl font-bold text-gray-800">
                   <span>Total Games: {selectedBlobber.totalGames}</span>
@@ -232,12 +146,12 @@ export const BattleTable = () => {
               </div>
             </div>
 
-            {/* current matches */}
+            current matches
             <div className="my-4 p-4 w-full h-[400px] border bg-gray-800 border-gray-400 rounded-lg">
               <CurrentMatchTable></CurrentMatchTable>
             </div>
 
-            {/* showdown challenge buttons */}
+            showdown challenge buttons
             <div className="mt-auto w-full flex justify-start items-center text-orange-200 font-medium gap-2">
               <button className="bg-[#664A44] px-4 py-2 rounded-lg hover:bg-orange-700 hover:text-white">
                 Challenge Blobber to A ShowDown!
@@ -248,7 +162,7 @@ export const BattleTable = () => {
             </div>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 };
