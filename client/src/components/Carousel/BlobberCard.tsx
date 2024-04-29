@@ -6,7 +6,7 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { Entity, HasValue} from "@dojoengine/recs";
 import { useDojo } from "../../dojo/useDojo";
 import { useComponentValue, useEntityQuery} from "@dojoengine/react";
-import { ChooseBlobertModel } from "../PickBlobert";
+import { ChooseBlobertModel } from "./PickBlobert";
 import { publicBlobertsPath } from "../../constants";
 
 export const BlobberCard = ({

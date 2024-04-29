@@ -1,7 +1,7 @@
 import { CustomFlowbiteTheme, Modal, Progress } from "flowbite-react";
 import { useState } from "react";
-import { publicBlobertsPath } from "../constants";
-import { useDojo } from "../dojo/useDojo";
+import { publicBlobertsPath } from "../../constants";
+import { useDojo } from "../../dojo/useDojo";
 
 const customModalTheme: CustomFlowbiteTheme["modal"] = {
   root: {
