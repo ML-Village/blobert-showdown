@@ -7,6 +7,7 @@ import { MdMeetingRoom } from "react-icons/md";
 import type { CustomFlowbiteTheme } from "flowbite-react";
 
 import { BattleTable } from "./BattleTable";
+import ChallengeTable from "./ChallengeTable";
 
 const customTabsTheme: CustomFlowbiteTheme["tabs"] = {
   base: "flex flex-col",
@@ -75,10 +76,12 @@ export const ShowdownList = () => {
           <BattleTable />
         </div>
       </Tabs.Item>
-      <Tabs.Item title="Your Showdown" icon={MdMeetingRoom}>
-        <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
+      <Tabs.Item title="Challenger" icon={GiBattleGear}>
+        <div className="h-[35rem] overflow-y-auto">
+          <ChallengeTable />
+        </div>
       </Tabs.Item>
-      <Tabs.Item title="Open Rooms" icon={GiBattleGear}>
+      <Tabs.Item title="Open Rooms" icon={MdMeetingRoom}>
         <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
       <Tabs.Item title="Live Showdowns" icon={MdLiveTv}>

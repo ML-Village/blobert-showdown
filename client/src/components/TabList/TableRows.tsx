@@ -20,10 +20,10 @@ export default function TableRows({ value }: any) {
   } = useDojo();
 
   const player = useComponentValue(Player, value);
-  const filteredPlayers = useEntityQuery([
+  const filteredPlayer = useEntityQuery([
     HasValue(Lineup, { player_id: player?.player_id }),
   ]);
-  const lineup = useComponentValue(Lineup, filteredPlayers);
+  const lineup = useComponentValue(Lineup, filteredPlayer);
 
   //console
 
