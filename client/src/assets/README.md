@@ -68,7 +68,7 @@
                 <td>NFT-COLLECTOR</td>
                 <td>Identify as a Furry. Did not welcome notion of crypto in bullrun period of 2020-2021. Believes there are environmental issues with crytpo tech. Believe that games should not have crypto or blockchain tech in them. Believe that NFTs are theft on Artists and wastes energy. Have sinced warmed up to Crypto.</td>
                 <td>Block Crypto Game Listings</td>
-                <td>Buy NFTs Floor</td>
+                <td>Buys NFT Floor</td>
                 <td>Furry Blogs Crypto</td>
                 <td>Crypto hurts the environment.</td>
             </tr>
@@ -153,9 +153,9 @@
                 <td><img src="../../public/bloberts/nft-collectoor/duck-bert.png" width="250px"/></td>
                 <td>NFT-Collectoor</td>
                 <td>INFLUENZA</td>
-                <td>COllects NFTs more aligned to Chain & Ecosystem</td>
+                <td>Collects NFTs more aligned to Chain & Ecosystem</td>
                 <td>Issues Based NFT Merch</td>
-                <td>Copys Cramer</td>
+                <td>Buys NFT Floor</td>
                 <td>Tweets Ecosystem conviction</td>
                 <td>Panels in X spaces</td>
             </tr>
