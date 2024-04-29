@@ -75,10 +75,10 @@ export const ShowdownList = () => {
           <BattleTable />
         </div>
       </Tabs.Item>
-      <Tabs.Item title="Open Rooms" icon={MdMeetingRoom}>
+      <Tabs.Item title="Your Showdown" icon={MdMeetingRoom}>
         <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
-      <Tabs.Item title="Your Showdowns" icon={GiBattleGear}>
+      <Tabs.Item title="Open Rooms" icon={GiBattleGear}>
         <div className="h-[35rem] overflow-y-auto">{/* <BattleTable /> */}</div>
       </Tabs.Item>
       <Tabs.Item title="Live Showdowns" icon={MdLiveTv}>

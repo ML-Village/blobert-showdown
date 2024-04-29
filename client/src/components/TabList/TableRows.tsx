@@ -7,7 +7,7 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { Entity, HasValue } from "@dojoengine/recs";
 import { feltToString } from "../../utils/starknet";
 import { publicBlobbersPath, publicBlobertsPath } from "../../constants";
-import RowModal from "./Modal";
+import RowModal from "./RowModal";
 import { useState } from "react";
 
 // value is player entityid
@@ -17,7 +17,6 @@ export default function TableRows({ value }: any) {
     setup: {
       clientComponents: { Player, Lineup }, // return a client Component
     },
-    account,
   } = useDojo();
 
   const player = useComponentValue(Player, value);
@@ -173,7 +172,13 @@ export default function TableRows({ value }: any) {
             : "0%"}
         </Table.Cell>
       </Table.Row>
-      <RowModal openModal={openModal} setOpenModal={setOpenModal} player={player} lineup={lineup} />
+
+      <RowModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        player={player}
+        lineup={lineup}
+      />
     </>
   );
 }

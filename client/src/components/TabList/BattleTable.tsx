@@ -6,7 +6,7 @@ import { useEntityQuery } from "@dojoengine/react";
 import { Entity, Has, HasValue } from "@dojoengine/recs";
 import TableRows from "./TableRows";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
-import RowModal from "./Modal";
+import RowModal from "./RowModal";
 
 const customTableTheme: CustomFlowbiteTheme["table"] = {
   root: {
