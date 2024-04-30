@@ -13,6 +13,8 @@ move = "./scripts/move.sh"
 
 [dependencies]
 dojo = { git = "https://github.com/dojoengine/dojo", tag = "v0.6.0" }
+pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
+openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.10.0" }
 
 [[target.dojo]]
 

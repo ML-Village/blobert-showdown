@@ -27,7 +27,7 @@ trait ILobby<TContractState> {
         turn_expiry: u64,
         total_turn_time: u64,
         challenge_expiry: u64,
-    );
+    ) -> u128;
     fn accept_challenge(self: @TContractState, game_id: u128);
 }
 
@@ -213,7 +213,7 @@ mod lobby {
             turn_expiry: u64,
             total_turn_time: u64,
             challenge_expiry: u64,
-        ) {
+        ) -> u128 {
             // Get the address of the current caller, possibly the player's address.
             let caller = get_caller_address();
 
@@ -270,7 +270,8 @@ mod lobby {
             emit!(
                 self.world(),
                 events::PlayerChallenged { player: caller, game_id, turn_expiry, challenge_expiry }
-            )
+            );
+            (game_id)
         }
 
 
