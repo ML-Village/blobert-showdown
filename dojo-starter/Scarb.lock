@@ -19,4 +19,16 @@ name = "dojo_starter"
 version = "0.6.0"
 dependencies = [
  "dojo",
+ "openzeppelin",
+ "pragma_lib",
 ]
+
+[[package]]
+name = "openzeppelin"
+version = "0.10.0"
+source = "git+https://github.com/OpenZeppelin/cairo-contracts.git?tag=v0.10.0#d77082732daab2690ba50742ea41080eb23299d3"
+
+[[package]]
+name = "pragma_lib"
+version = "1.0.0"
+source = "git+https://github.com/astraly-labs/pragma-lib#2eca9b70dc505788423da1eedbf2d65563cc3102"

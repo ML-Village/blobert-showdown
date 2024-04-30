@@ -41,7 +41,8 @@ mod game {
         (game, player_number)
     }
 
-    fn process_game() {}
+    //process the game
+    fn process_turn() {}
 
     #[abi(embed_v0)]
     impl GameImpl of IGame<ContractState> {
@@ -75,4 +76,3 @@ mod game {
     }
 }
 
-fn calculate_battle() {}

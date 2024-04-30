@@ -3,6 +3,8 @@ mod systems {
     mod registry;
     mod game;
     mod utils;
+    mod battle;
+    mod oracle;
 }
 
 mod models {
