@@ -15,6 +15,7 @@ sozo auth grant --world $WORLD_ADDRESS --wait writer \
   Player,dojo_starter::systems::lobby::lobby\
   Lineup,dojo_starter::systems::lobby::lobby\
   Game,dojo_starter::systems::lobby::lobby\
+  BlobertInGame,dojo_starter::systems::lobby::lobby\
   BlobertDex,dojo_starter::systems::registry::registry\
   >/dev/null
 

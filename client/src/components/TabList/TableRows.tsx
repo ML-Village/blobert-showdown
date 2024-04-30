@@ -4,7 +4,7 @@ import { useComponentValue, useEntityQuery } from "@dojoengine/react";
 import { Table } from "flowbite-react";
 import { useDojo } from "../../dojo/useDojo";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { Entity, HasValue } from "@dojoengine/recs";
+import { Entity, Has, HasValue } from "@dojoengine/recs";
 import { feltToString } from "../../utils/starknet";
 import { publicBlobbersPath, publicBlobertsPath } from "../../constants";
 import RowModal from "./RowModal";
@@ -23,9 +23,15 @@ export default function TableRows({ value }: any) {
   const filteredPlayer = useEntityQuery([
     HasValue(Lineup, { player_id: player?.player_id }),
   ]);
-  const lineup = useComponentValue(Lineup, filteredPlayer);
+  const lineup = useComponentValue(Lineup, filteredPlayer[0]);
+  const hasLineup = useEntityQuery([Has(Lineup)]); // to check all entityid in a model
+
 
   //console
+  console.log("filtered", filteredPlayer)
+  console.log("lineup",hasLineup)
+
+
 
   const [openModal, setOpenModal] = useState(false);
 

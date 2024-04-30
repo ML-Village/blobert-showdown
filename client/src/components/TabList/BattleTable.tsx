@@ -43,7 +43,7 @@ export const BattleTable = () => {
   } = useDojo();
 
   const hasPlayer = useEntityQuery([Has(Player)]); // to check all entityid in a model
-  console.log("HAS PLAYER ", hasPlayer);
+  // console.log("HAS PLAYER ", hasPlayer);
 
   return (
     <>

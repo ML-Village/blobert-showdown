@@ -184,7 +184,7 @@ export function createSystemCalls(
 
   const accept_challenge = async (
     account: AccountInterface,
-    game_id: number
+    game_id: any
   ) => {
     try {
       const { transaction_hash } = await client.lobby.accept_challenge({

@@ -6,7 +6,7 @@ import { Entity, Has, HasValue } from "@dojoengine/recs";
 export default function ChallengeTable() {
   const {
     setup: {
-      systemCalls: { register_player }, // already return a function WRITE
+      systemCalls: { accept_challenge }, // already return a function WRITE
       clientComponents: { Player, Game }, // return a client Component
     },
     account,
@@ -22,9 +22,20 @@ export default function ChallengeTable() {
     HasValue(Game, { player_b: player?.player_id }),
   ]);
 
-  const game = useComponentValue(Game, filteredPlayer);
+  const game = useComponentValue(Game, filteredPlayer[0]);
 
-  console.log("Has Game", game);
+  // console.log("Has Game", game);
+  // console.log("game id", game?.game_id);
+  // console.log("player", player)
 
-  return <div>hello</div>;
+  return(
+    <div>
+      <h1>hello</h1>
+      <button className="rounded-full p-2 border-2"
+      onClick={()=> accept_challenge(account.account, game?.game_id)}
+      >accept challenge</button>
+    </div>
+
+
+  ) 
 }

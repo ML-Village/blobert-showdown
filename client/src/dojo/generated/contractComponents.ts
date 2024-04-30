@@ -35,7 +35,7 @@ export function defineContractComponents(world: World) {
     Game: (() => {
       return defineComponent(
         world,
-        { game_id: RecsType.BigInt, player_a: RecsType.BigInt, player_b: RecsType.BigInt, player_a_active_slot: RecsType.Number, player_b_active_slot: RecsType.Number, turn: RecsType.Number, game_status: RecsType.Number, winner: RecsType.BigInt, winner_slot: RecsType.Number, turn_expiry: RecsType.BigInt, challenge_expiry: RecsType.BigInt, total_turn_time: RecsType.BigInt, timestamp_start: RecsType.BigInt, timestamp_end: RecsType.BigInt },
+        { game_id: RecsType.BigInt, player_a: RecsType.BigInt, player_b: RecsType.BigInt, player_a_active_slot: RecsType.Number, player_b_active_slot: RecsType.Number, turn: RecsType.Number, game_status: RecsType.String, winner: RecsType.BigInt, winner_slot: RecsType.Number, turn_expiry: RecsType.BigInt, challenge_expiry: RecsType.BigInt, total_turn_time: RecsType.BigInt, timestamp_start: RecsType.BigInt, timestamp_end: RecsType.BigInt },
         {
           metadata: {
             name: "Game",

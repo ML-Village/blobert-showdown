@@ -167,7 +167,7 @@ export async function setupWorld(provider: DojoProvider) {
       game_id,
     }: {
       account: AccountInterface;
-      game_id: number;
+      game_id: any;
     }) => {
       try {
         return await provider.execute(

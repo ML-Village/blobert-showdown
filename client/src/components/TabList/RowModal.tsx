@@ -56,7 +56,7 @@ export default function RowModal({
   const [totalLabel, setTotalLabel] = useState("1 hour");
   const [challengeLabel, setChallengeLabel] = useState("1 hour");
 
-  console.log(player);
+  // console.log(player);
 
   return (
     <Modal
