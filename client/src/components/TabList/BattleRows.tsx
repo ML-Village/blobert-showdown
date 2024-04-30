@@ -1,18 +1,15 @@
-// import { Table } from "flowbite-react";
-
 import { useComponentValue, useEntityQuery } from "@dojoengine/react";
 import { Table } from "flowbite-react";
 import { useDojo } from "../../dojo/useDojo";
-import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { Entity, Has, HasValue } from "@dojoengine/recs";
+import { Has, HasValue } from "@dojoengine/recs";
 import { feltToString } from "../../utils/starknet";
 import { publicBlobbersPath, publicBlobertsPath } from "../../constants";
-import RowModal from "./RowModal";
 import { useState } from "react";
+import BattleModal from "./BattleModal";
 
 // value is player entityid
 
-export default function TableRows({ value }: any) {
+export default function BattleRows({ value }: any) {
   const {
     setup: {
       clientComponents: { Player, Lineup }, // return a client Component
@@ -26,30 +23,13 @@ export default function TableRows({ value }: any) {
   const lineup = useComponentValue(Lineup, filteredPlayer[0]);
   const hasLineup = useEntityQuery([Has(Lineup)]); // to check all entityid in a model
 
-
   //console
-  console.log("filtered", filteredPlayer)
-  console.log("lineup",hasLineup)
-
-
+  console.log("filtered", filteredPlayer);
+  console.log("lineup", hasLineup);
 
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    // <Table.Row>
-    //   <Table.Cell>
-    //     <h1>pic: {player?.profile_pic}</h1>
-    //     <h1>{feltToString(String(player?.name ?? ""))}</h1>
-
-    //   </Table.Cell>
-    //   <Table.Cell>
-    //     <h1>pic: {player?.profile_pic}</h1>
-    //     <h1>{feltToString(String(player?.name ?? ""))}</h1>
-
-    //   </Table.Cell>
-
-    // </Table.Row>
-
     <>
       <Table.Row
         onClick={() => {
@@ -179,7 +159,7 @@ export default function TableRows({ value }: any) {
         </Table.Cell>
       </Table.Row>
 
-      <RowModal
+      <BattleModal
         openModal={openModal}
         setOpenModal={setOpenModal}
         player={player}

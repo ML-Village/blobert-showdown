@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
-import { Table, Modal } from "flowbite-react";
+import { Table } from "flowbite-react";
 import type { CustomFlowbiteTheme } from "flowbite-react";
 import { useDojo } from "../../dojo/useDojo";
 import { useEntityQuery } from "@dojoengine/react";
-import { Entity, Has, HasValue } from "@dojoengine/recs";
-import TableRows from "./TableRows";
-import { getEntityIdFromKeys } from "@dojoengine/utils";
-import RowModal from "./RowModal";
+import { Has } from "@dojoengine/recs";
+import BattleRows from "./BattleRows";
 
 const customTableTheme: CustomFlowbiteTheme["table"] = {
   root: {
@@ -64,7 +61,7 @@ export const BattleTable = () => {
 
         <Table.Body className="divide-y">
           {hasPlayer.map((value, index) => (
-            <TableRows key={index} value={value} />
+            <BattleRows key={index} value={value} />
           ))}
         </Table.Body>
       </Table>

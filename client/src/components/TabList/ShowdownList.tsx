@@ -76,7 +76,7 @@ export const ShowdownList = () => {
           <BattleTable />
         </div>
       </Tabs.Item>
-      <Tabs.Item title="Challenger" icon={GiBattleGear}>
+      <Tabs.Item title="Challenges" icon={GiBattleGear}>
         <div className="h-[35rem] overflow-y-auto">
           <ChallengeTable />
         </div>

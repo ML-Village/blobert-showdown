@@ -39,7 +39,7 @@ interface RowModalProps {
   lineup: any;
 }
 
-export default function RowModal({
+export default function BattleModal({
   openModal,
   setOpenModal,
   player,
