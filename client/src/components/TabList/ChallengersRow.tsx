@@ -1,52 +1,66 @@
-import { useComponentValue, useEntityQuery } from "@dojoengine/react";
 import { Table } from "flowbite-react";
 import { useDojo } from "../../dojo/useDojo";
-import { Has, HasValue } from "@dojoengine/recs";
-import { feltToString } from "../../utils/starknet";
+import { getEntityIdFromKeys } from "@dojoengine/utils";
+import { Entity, Has, HasValue } from "@dojoengine/recs";
+import { useComponentValue, useEntityQuery } from "@dojoengine/react";
 import { publicBlobbersPath, publicBlobertsPath } from "../../constants";
+import { feltToString } from "../../utils/starknet";
+import ChallengerModal from "./ChallengeModal";
 import { useState } from "react";
-import BattleModal from "./BattleModal";
 
-// value is player entityid
-
-export default function BattleRows({ value }: any) {
+export default function ChallengersRows({ value }: any) {
   const {
     setup: {
-      clientComponents: { Player, Lineup }, // return a client Component
+      systemCalls: { accept_challenge }, // already return a function WRITE
+      clientComponents: { Player, Game, Lineup }, // return a client Component
     },
+    account,
   } = useDojo();
 
-  const player = useComponentValue(Player, value);
-  const filteredLineup = useEntityQuery([
-    HasValue(Lineup, { player_id: player?.player_id }),
-  ]);
-  const lineup = useComponentValue(Lineup, filteredLineup[0]);
-  const hasLineup = useEntityQuery([Has(Lineup)]); // to check all entityid in a model
+  // const playerEntityId = getEntityIdFromKeys([
+  //   BigInt(account.account.address),
+  // ]) as Entity;
 
-  //console
-  // console.log("filtered", filteredPlayer);
-  // console.log("lineup", hasLineup);
+  // const player = useComponentValue(Player, playerEntityId);
+  const game = useComponentValue(Game, value);
+
+  const filteredOponents = useEntityQuery([
+    HasValue(Player, { player_id: game?.player_a }),
+  ]);
+  const filteredLineup = useEntityQuery([
+    HasValue(Lineup, { player_id: game?.player_a }),
+  ]);
+  const oponent = useComponentValue(Player, filteredOponents[0]);
+  const lineup = useComponentValue(Lineup, filteredLineup[0]);
+
+  const lineups = useEntityQuery([Has(Lineup)]);
+
+  // console.log("lineups", lineups);
+  // console.log("asdasd", filteredOponents);
+  // console.log(lineup)
+  // console.log("player", player?.player_id)
+  // console.log("game", game)
 
   const [openModal, setOpenModal] = useState(false);
+
 
   return (
     <>
       <Table.Row
-        onClick={() => {
-          setOpenModal(true);
-        }}
-      >
+      onClick={() => {
+        setOpenModal(true);
+      }}>
         <Table.Cell className="text-left whitespace-nowrap font-medium">
           <div className="flex flex-col items-center justify-center">
             <img
               className="h-16"
               src={
                 publicBlobbersPath[
-                  player?.profile_pic % publicBlobbersPath.length
+                  oponent?.profile_pic % publicBlobbersPath.length
                 ]
               }
             />
-            <span>{feltToString(String(player?.name ?? ""))}</span>
+            <span>{feltToString(String(oponent?.name ?? ""))}</span>
           </div>
         </Table.Cell>
         <Table.Cell>
@@ -151,18 +165,20 @@ export default function BattleRows({ value }: any) {
             />
           </div>
         </Table.Cell>
-        <Table.Cell className="font-semibold">{player?.total_duels}</Table.Cell>
         <Table.Cell className="font-semibold">
-          {player?.total_duels > 0
-            ? `${Math.round((player?.total_wins / player?.total_duels) * 100)}%`
+          {oponent?.total_duels}
+        </Table.Cell>
+        <Table.Cell className="font-semibold">
+          {oponent?.total_duels > 0
+            ? `${Math.round((oponent?.total_wins / oponent?.total_duels) * 100)}%`
             : "0%"}
         </Table.Cell>
       </Table.Row>
 
-      <BattleModal
+      <ChallengerModal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        player={player}
+        oponent={oponent}
         lineup={lineup}
       />
     </>
