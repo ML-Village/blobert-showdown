@@ -37,6 +37,7 @@ interface RowModalProps {
   setOpenModal: (open: boolean) => void;
   oponent: any;
   lineup: any;
+  gameId: any
 }
 
 export default function ChallengerModal({
@@ -44,10 +45,11 @@ export default function ChallengerModal({
   setOpenModal,
   oponent,
   lineup,
+  gameId
 }: RowModalProps) {
   const {
     setup: {
-      systemCalls: { challenge_player }, // already return a function WRITE
+      systemCalls: { accept_challenge }, // already return a function WRITE
     },
     account,
   } = useDojo();
@@ -56,7 +58,7 @@ export default function ChallengerModal({
   const [totalLabel, setTotalLabel] = useState("1 hour");
   const [challengeLabel, setChallengeLabel] = useState("1 hour");
 
-  // console.log(player);
+  console.log("game ID ", gameId);
 
   return (
     <Modal
@@ -238,15 +240,15 @@ export default function ChallengerModal({
           </div>
 
           <div className="flex gap-8 mt-10">
-            {/* <button
+            <button
               className="border-2 rounded-xl m-2 p-2"
               onClick={() =>
-                challenge_player(account.account, oponent?.player_id, 10, 10, 10)
+                accept_challenge(account.account, gameId)
               }
             >
-              Challenge to a showdown
+              Accept Challenge
             </button>
-            <button className="border-2 rounded-xl m-2 p-2">Cancel</button> */}
+            <button className="border-2 rounded-xl m-2 p-2">Cancel</button>
           </div>
 
           {/* showdown challenge buttons
